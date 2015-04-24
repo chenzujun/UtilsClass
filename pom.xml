@@ -5,4 +5,19 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>UtilsClass</name>
   <description>工具类</description>
+  
+  
+  <dependencies>
+  	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.22</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.oracle</groupId>
+	    <artifactId>ojdbc</artifactId>
+	    <version>6</version>
+	</dependency>
+  
+  </dependencies>
 </project>

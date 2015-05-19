@@ -1,9 +1,5 @@
 package com.grammar.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ListTest
 {
@@ -11,16 +7,20 @@ public class ListTest
     
     public static void main(String[] args)
     {
-     List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-     Map<String, String> map = new HashMap<String, String>();
-     map.put("1", "hi");
-     list.add(map);
+//     List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+//     Map<String, String> map = new HashMap<String, String>();
+//     map.put("1", "hi");
+//     list.add(map);
+//     
+//     Map<String, String> map2 = new HashMap<String, String>();
+//     map2.put("2", "hello");
+//     list.add(map2);
+//     
+//     System.out.println(list.toString());
      
-     Map<String, String> map2 = new HashMap<String, String>();
-     map2.put("2", "hello");
-     list.add(map2);
-     
-     System.out.println(list.toString());
-     
+        String districtfinance = "冯诗玮(比亚迪精密电子有限公司)";
+        int c = districtfinance.indexOf("(");
+        System.out.println(districtfinance.indexOf("（"));
+        System.out.println(districtfinance.substring(0, c));
     }
 }

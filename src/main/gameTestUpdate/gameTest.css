@@ -1,0 +1,151 @@
+html body {
+	height: 100%;
+	min-width: 320px;
+	margin: 0px auto;
+	text-align: center;
+	font-family: 黑体;
+	color: #585858;
+	background-image: url("bg.png");
+}
+
+.headerDiv {
+	height: 10%;
+	text-align: right;
+	width: 100%;
+}
+
+#goldCount {
+	color: #ff2400;
+	font-size: 22px;
+}
+
+.SectionDiv {
+	height: 90%;
+	width: 100%;
+}
+
+.SectionDiv .bodyHeader {
+	line-height: 10px;
+	height: 10%;
+}
+
+.levelNum {
+	font-size: 24px;
+	margin: 10px auto;
+}
+
+.quesNum {
+	font-size: 22px;
+	margin: 10px auto;
+}
+
+.SectionDiv .girlImgDiv {
+	display: inline-block;
+	height: 60%;
+}
+
+.SectionDiv .girlImgDiv	.girlImg {
+	position: absolute;
+	height: auto;
+	z-index: -1;
+}
+
+.SectionDiv .girlImgDiv .mycanvas {
+	display: inline-block;
+}
+
+.answerClass {
+	margin: 30% 0px 0px;
+	display: none;
+}
+
+.getCoinButton {
+	background: url(getPresent.png);
+	width: 107px;
+	height: 35px;
+	margin: 20px 0px;
+	display: none;
+}
+
+.SectionDiv .girlImgDiv .CoinDiv {
+	width: 45%;
+	display: none;
+}
+
+.coinClass {
+	margin: 30px 0px 20px;
+	display: none;
+}
+
+.coinMes {
+	font-family: 黑体;
+	color: #585858;
+	font-size: 24px;
+	margin: 0px 0px 10px;
+	display: none;
+}
+
+.SectionDiv .wrapper {
+	height: 20%;
+	display: inline-block;
+}
+
+.wrapper {
+	text-align: center;
+}
+
+.wrapper .label {
+	float: left;
+	text-align: center;
+	font-family: 黑体;
+	color: #585858;
+}
+
+.label {
+	margin: 20px 10px 0px;
+}
+
+.label .mockradio {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: url("gUnChoosed.png");
+	background-size: 100%;
+}
+
+.label .radiobox {
+	display: none;
+}
+
+.label .txt {
+	display: block;
+	font-family: 黑体;
+	color: #585858;
+	line-height: 30px;
+}
+
+.checked .mockradio {
+	background: url("gChoosed.png");
+	background-size: 100%;
+}
+
+.SectionDiv .sumbitDiv {
+	display: block;
+	height: 10%;
+}
+
+.SectionDiv .sumbitDiv .sumbitButton {
+	width: 150px;
+	height：30px;
+}
+
+.footerDiv {
+	width: 100%;
+	height: 10%;
+}
+
+.footerDiv .duiHuanButton {
+	display: inline-block;
+	width: 30%;
+	margin: 20px 0px 0px;
+}

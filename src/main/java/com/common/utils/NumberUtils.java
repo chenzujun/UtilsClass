@@ -1,4 +1,4 @@
-package com.utils.common.string;
+package com.common.utils;
 
 public class NumberUtils
 {

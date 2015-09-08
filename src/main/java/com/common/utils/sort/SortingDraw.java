@@ -1,4 +1,4 @@
-package com.utils.sort;
+package com.common.utils.sort;
 
 public class SortingDraw
 {

@@ -58,7 +58,9 @@ public class DateUtil
 			        }else{
 				        break;
 				    }
+			        // 设置下周第一天
 			        startCalendar.add(Calendar.WEEK_OF_YEAR, 1);
+			        startCalendar.set(Calendar.DAY_OF_WEEK, startCalendar.getFirstDayOfWeek());
 				}
 			}else if ("3".equals(type)) {
 				while(true){
@@ -189,6 +191,9 @@ public class DateUtil
 	
     public static void main(String[] args) throws ParseException
     {
-    	generateDateList("2015-01-05", "2015-05-14", "2");
+    	List<String> list = generateDateList("2015-09-06", "2015-09-11", "2");
+    	for (String string : list) {
+			System.out.println(string);
+		}
     }
 }

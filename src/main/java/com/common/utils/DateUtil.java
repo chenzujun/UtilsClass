@@ -1,14 +1,21 @@
 package com.common.utils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DateUtil
 {
+	public static DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static DateFormat formatstart = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+	public static DateFormat formatend = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+	
 	/**
 	 * 按类型生产指定日期范围的数组
 	 * 
@@ -71,7 +78,115 @@ public class DateUtil
 	    
 		return resultList;
 	}
-    
+	
+	/**
+	 * 获取当月的开始时间和当前时间
+	 * 
+	 * @return
+	 */
+	public static Map<String, String> getCurrentMonthTime() {
+		Map<String, String> map = new HashMap<String, String>();
+		// 获取Calendar
+		Calendar calendar = Calendar.getInstance();
+		
+		try {
+			// 设置开始时间
+			calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DATE));
+			map.put("startTime", formatstart.format(calendar.getTime()));
+			
+			// 设置当前时间
+			calendar.setTime(new Date());
+			map.put("endTime", format.format(calendar.getTime()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 获取上个月的开始时间和上个月的结束时间
+	 * 
+	 * @return
+	 */
+	public static Map<String, String> getLastMonthTime() {
+		Map<String, String> map = new HashMap<String, String>();
+		// 获取Calendar
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, -1);
+		
+		try {
+			// 设置开始时间
+			calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+			map.put("startTime", formatstart.format(calendar.getTime()));
+			
+			// 设置当前时间
+			calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+			map.put("endTime", formatend.format(calendar.getTime()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 获取本季度的开始时间和当前时间
+	 * 
+	 * @return
+	 */
+	public static Map<String, String> getCurrentQuarterTime() {
+		Map<String, String> map = new HashMap<String, String>();
+		// 获取Calendar
+		Calendar calendar = Calendar.getInstance();
+		
+		int currentMonth = calendar.get(Calendar.MONTH) + 1; 
+		try {
+			// 设置开始时间
+			if (currentMonth >= 1 && currentMonth <= 3) 
+				calendar.set(Calendar.MONTH, 0); 
+			else if (currentMonth >= 4 && currentMonth <= 6) 
+				calendar.set(Calendar.MONTH, 3); 
+			else if (currentMonth >= 7 && currentMonth <= 9) 
+				calendar.set(Calendar.MONTH, 6); 
+			else if (currentMonth >= 10 && currentMonth <= 12) 
+				calendar.set(Calendar.MONTH, 9);
+			calendar.set(Calendar.DATE, 1);
+			map.put("startTime", formatstart.format(calendar.getTime()));
+
+			// 设置当前时间
+			calendar.setTime(new Date());
+			map.put("endTime", format.format(calendar.getTime()));
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		
+		return map; 
+	}
+	
+	/**
+	 * 获取本年的开始时间和当前时间
+	 * 
+	 * @return
+	 */
+	public static Map<String, String> getCurrentYearTime() {
+		Map<String, String> map = new HashMap<String, String>();
+		// 获取Calendar
+		Calendar calendar = Calendar.getInstance();
+		
+		// 设置开始时间
+		try {
+			calendar.set(Calendar.MONTH, calendar.getActualMinimum(Calendar.MONTH));
+			calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DATE));
+			map.put("startTime", formatstart.format(calendar.getTime()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		// 设置当前时间
+		calendar.setTime(new Date());
+		map.put("endTime", format.format(calendar.getTime()));
+		return map;
+	}
+	
     public static void main(String[] args) throws ParseException
     {
     	generateDateList("2015-01-05", "2015-05-14", "2");

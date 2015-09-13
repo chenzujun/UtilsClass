@@ -30,6 +30,10 @@ public class TreeMapTest
     
     public static void main(String[] args)
     {
-        new TreeMapTest().getMinStr();
+//        new TreeMapTest().getMinStr();
+    	
+    	Double d = 1.23;
+    	Integer i = d.intValue();
+    	System.out.println(i);
     }
 }

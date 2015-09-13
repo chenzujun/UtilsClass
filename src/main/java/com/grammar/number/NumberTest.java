@@ -11,7 +11,7 @@ public class NumberTest {
 				.append(iniNum.replaceAll(",", "")).reverse(); 
 		
 		// ② 替换这样的串：连续split位数字的串，其右边还有个数字，在串的右边添加逗号
-		
+
 		String retNum = Pattern.compile("(\\d{" + split + "})(?=\\d)")
 				.matcher(tmp.toString()).replaceAll("$1,");
 		// ③ 替换完后，再把串倒回去返回

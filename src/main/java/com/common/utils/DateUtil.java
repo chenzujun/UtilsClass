@@ -189,11 +189,40 @@ public class DateUtil
 		return map;
 	}
 	
+	public static List<Integer> getExecuteDaysOfTheMonth(Date month,List<Integer> holiday)
+	{
+		List<Integer> workDay = new ArrayList<Integer>();
+		boolean isNoHoliday = holiday == null || holiday.size()==0; 
+		int days = HycCommonUtils.getMonthDays(month);
+		for( int i=1;i<=days;++i ){
+			if (isNoHoliday || ! holiday.contains(i)) {
+				workDay.add(i);
+			}
+		}
+		return workDay ;	
+	}
+	
+	public static Date getMarkDate(Date month, List<Integer> workday){
+		Calendar c = Calendar.getInstance();
+    	c.setTime(month);
+    	c.set(Calendar.DAY_OF_MONTH, workday.get(2));
+    	
+    	return c.getTime();
+	}
+	
     public static void main(String[] args) throws ParseException
     {
-    	List<String> list = generateDateList("2015-09-06", "2015-09-11", "2");
-    	for (String string : list) {
-			System.out.println(string);
-		}
+//    	List<String> list = generateDateList("2015-09-01", "2015-09-30", "1");
+//    	for (String string : list) {
+//			System.out.println(string);
+//		}
+    	List<Integer> holiday = new ArrayList<Integer>();
+    	holiday.add(2);
+    	
+    	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    	Date date = new Date();
+    	
+    	List<Integer> workday = getExecuteDaysOfTheMonth(date, holiday);
+    	System.out.println(df.format(getMarkDate(date, workday)));
     }
 }

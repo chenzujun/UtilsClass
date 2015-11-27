@@ -36,5 +36,6 @@ public class ListTest {
 	public static void main(String[] args) {
 		String[] aArray = new String[5];
 		aArray[0]= "a";
+		testFor();
 	}
 }

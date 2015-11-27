@@ -30,8 +30,12 @@ public class NumberTest {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(3.2/3);
-		System.out.println(saveDecimals(0, 2));
+
+		// TODO Auto-generated method stub
+		Double d = 1323432.131313;
+		BigDecimal bg = new BigDecimal(d);  
+		System.out.println(bg.setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
+		System.out.println(bg.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
 	}
 
 }

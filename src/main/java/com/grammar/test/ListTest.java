@@ -1,10 +1,11 @@
 package com.grammar.test;
 
+import java.util.Random;
+
 
 public class ListTest
 {
-    
-    
+
     public static void main(String[] args)
     {
 //     List<Map<String, String>> list = new ArrayList<Map<String, String>>();
@@ -22,16 +23,9 @@ public class ListTest
 //        int c = districtfinance.indexOf("(");
 //        System.out.println(districtfinance.indexOf("（"));
 //        System.out.println(districtfinance.substring(0, c));
-    	int a =35;
-    	int b = 300;
-    	
-    	System.out.println(Math.rint(a*100.0/b));
-    	System.out.println(Math.rint(a*100/b));
-    	System.out.println(Math.rint(0*100/b));
-    	System.out.println(Math.rint(0*100.0/b));
-//    	System.out.println(Long.MAX_VALUE);
-//    	System.out.println(Long.MIN_VALUE);
-//    	System.out.println(Double.MAX_VALUE);
-//    	System.out.println(Double.MIN_VALUE);
+    	Random random = new Random();
+		for (int i = 0; i < 100; i++) {
+			System.out.println(random.nextInt(100)+1);
+		}
     }
 }

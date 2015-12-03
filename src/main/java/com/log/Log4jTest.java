@@ -8,5 +8,7 @@ public class Log4jTest
     {
         Logger logger = Logger.getLogger(Log4jTest.class);
         logger.info("hi");
+        
+        
     }
 }

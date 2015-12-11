@@ -1,8 +1,11 @@
 package com.grammar.set;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ListTest {
 
@@ -23,19 +26,55 @@ public class ListTest {
 		list.add(new Integer(1));
 		list.add(new Integer(22));
 		list.add(new Integer(333));
-		for (Integer in : list) {
-			if(22 == in){
-				list.remove(in);
+//		for (Integer in : list) {
+//			if(22 == in){
+//				list.remove(in);
+//			}
+//			System.out.println(in);
+//		}
+//		for (Integer integer : list) {
+////			System.out.println(integer);
+//		}
+		
+		for (Iterator<Integer> iter = list.iterator(); iter.hasNext();) {
+            int in = (Integer) iter.next();
+            if(22 == in){
+            	iter.remove();
 			}
-		}
+			System.out.println(in);
+        }
+		
 		for (Integer integer : list) {
+			System.out.println(integer);
+		}
+		
+	}
+	
+	public static void testSetRemove(){
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(new Integer(1));
+		set.add(new Integer(22));
+		set.add(new Integer(333));
+
+//		for (Integer integer : set) {
+//			if(22 == integer){
+//				set.remove(integer);
+//			}
+//		}
+		for (Iterator<Integer> iter = set.iterator(); iter.hasNext();) {
+            int in = (Integer) iter.next();
+            if(22 == in){
+            	iter.remove();
+			}
+			System.out.println(in);
+        }
+		
+		for (Integer integer : set) {
 			System.out.println(integer);
 		}
 	}
 	
 	public static void main(String[] args) {
-		String[] aArray = new String[5];
-		aArray[0]= "a";
-		testFor();
+		testSetRemove();
 	}
 }

@@ -1,6 +1,6 @@
 package com.md5;
 
-import java.security.*;
+import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

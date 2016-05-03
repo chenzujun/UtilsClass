@@ -2,8 +2,9 @@ package com.grammar.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 public class MapTest {
 	public static void main(String[] args) {
 		   List<Map<String, Object>> list1 = new ArrayList<Map<String,Object>>();
@@ -36,11 +37,14 @@ public class MapTest {
 					}
 				}
 			}
-	        System.out.println("fa");
 	        
-	          list1.addAll(list2);
-	          list2.clear();
-	          list1.addAll(list2);
-	        System.out.println("fa");
+	        Map<String, String> map = new HashMap<String, String>();
+	        map.put("1", "a");
+	        map.put("2", "b");
+	        map.put("3", "C");
+	        map.put("4", "d");
+	        for (Entry<String, String> t : map.entrySet()) {
+				System.out.println(t.getKey()+"=="+t.getValue());
+			}
 	}
 }

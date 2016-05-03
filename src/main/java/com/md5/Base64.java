@@ -1,7 +1,7 @@
 package com.md5;
 
-import  sun.misc.BASE64Decoder;
-import  sun.misc.BASE64Encoder;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 public class Base64
 {

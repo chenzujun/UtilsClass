@@ -13,6 +13,10 @@ public class StringTest {
 //		System.out.println(calledPhone2);
 		String str = "45645";
 		System.out.println(str.substring(0, str.length()-2));
+		
+		String st = "西区";
+		int t = -28;
+		System.out.println(-1*t/24);
 	}
 	
 }

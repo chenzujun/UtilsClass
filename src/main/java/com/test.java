@@ -1,9 +1,25 @@
 package com;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import com.common.utils.HycCommonUtils;
 
 public class test {
 
+    public static void method(List<String> list) {  
+        System.out.println("invoke method(List<String> list)");  
+    }  
+  
+    public static int method(List<Integer> list) {  
+        System.out.println("invoke method(List<Integer> list)");  
+        return 1;
+    }  
+  
 	private boolean isFourthWorkingDay(){
 		Calendar calendar = Calendar.getInstance();
 		int now = calendar.get(Calendar.DAY_OF_MONTH);
@@ -25,9 +41,15 @@ public class test {
 		return calendar.get(Calendar.DAY_OF_MONTH) == now;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stubnew
-		System.out.println(new test().isFourthWorkingDay());
+	public static void main(String[] args) throws ParseException {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		Date date = df.parse("2016-09-03");
+		
+	    if(date.before(new Date())){
+	    	System.out.println("开始售卖");
+	    }else {
+	    	System.out.println("=====");
+	    }
 	}
 
 }

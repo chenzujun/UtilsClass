@@ -1,7 +1,17 @@
+import java.util.Date;
+
 
 public class JAVAPTest {
 	 public static void main(String[] args) {  
-		  
+//		 boolean otherWarning =  ((new Date().getTime() -  createTime.getTime())-a)>=0; 
+		 
+		 
+		 System.out.println(new Date().getTime());
+		 System.out.println((45*1000 * 60 * 60 * 24+1L ) +"====");
+		 System.out.println( 72* 1000 * 60 * 60);
+		
+		 
+		 
 	    }  
 	  
 	    public static String contactWithStringNoLoopNoPara() {  

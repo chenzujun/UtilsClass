@@ -75,6 +75,16 @@ public class ListTest {
 	}
 	
 	public static void main(String[] args) {
-		testSetRemove();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(new Integer(1));
+		list.add(new Integer(22));
+		list.add(new Integer(333));
+		
+		List<Integer> list2 = list.subList(0, 1);
+		list.clear();
+		list=list2;
+		for (Integer integer : list) {
+			System.out.println(integer);
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.common.utils;
+package com.common.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -193,7 +193,7 @@ public class DateUtil
 	{
 		List<Integer> workDay = new ArrayList<Integer>();
 		boolean isNoHoliday = holiday == null || holiday.size()==0; 
-		int days = HycCommonUtils.getMonthDays(month);
+		int days = CommonUtils.getMonthDays(month);
 		for( int i=1;i<=days;++i ){
 			if (isNoHoliday || ! holiday.contains(i)) {
 				workDay.add(i);

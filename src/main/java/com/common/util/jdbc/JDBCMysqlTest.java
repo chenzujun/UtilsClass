@@ -1,4 +1,4 @@
-package com.common.utils.jdbc;
+package com.common.util.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,23 +7,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class JDBCOracleTest
+public class JDBCMysqlTest
 {
-    private static final String USER_ORACLE = "byd_portal_bpm";
-    private static final String PASS_ORACLE = "byd_portal_bpm";
+    private static final String USER_MYSQL = "raine";
+    private static final String PASS_MYSQL = "123456";
     
-    private static final String DB_URL_ORACLE = "jdbc:oracle:thin:@10.9.37.113:1521/orcl";
+    private static final String DB_URL_MYSQL = "jdbc:mysql://localhost:3306/mysql";
     
-    public static Connection getConnOracle(){
+    public static Connection getConnMysql(){
         Connection conn = null;
         
         try
         {
-            // STEP 2: Register JDBC driver
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            // Register JDBC driver
+            Class.forName("com.mysql.jdbc.Driver");
             
             // Open a connection
-            conn = DriverManager.getConnection(DB_URL_ORACLE, USER_ORACLE, PASS_ORACLE);
+            conn = DriverManager.getConnection(DB_URL_MYSQL, USER_MYSQL, PASS_MYSQL);
         }
         catch (ClassNotFoundException e)
         {
@@ -37,7 +37,6 @@ public class JDBCOracleTest
         return conn;
     }
     
-    
     public static void main(String[] args) throws Exception
     {
         
@@ -46,13 +45,13 @@ public class JDBCOracleTest
         try{
            //STEP 3: Open a connection
            System.out.println("Connecting to database...");
-           conn = getConnOracle();
+           conn = getConnMysql();
 
            //STEP 4: Execute a query
            System.out.println("Creating statement...");
            stmt = conn.createStatement();
            String sql;
-           sql = "SELECT id, name, age FROM testt";
+           sql = "SELECT id, name, age FROM test";
            ResultSet rs = stmt.executeQuery(sql);
 
            //STEP 5: Extract data from result set

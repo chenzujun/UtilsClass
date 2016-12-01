@@ -1,4 +1,4 @@
-package com.common.utils.document;
+package com.common.util.document;
 
 import java.io.IOException;
 import java.io.InputStream;

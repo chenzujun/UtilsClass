@@ -1,11 +1,11 @@
-package com.common.utils.sort;
+package com.common.util.sort;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.common.utils.EnumUtils;
+import com.common.util.EnumUtils;
 
 public class SortingDraw
 {

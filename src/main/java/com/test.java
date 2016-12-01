@@ -1,12 +1,10 @@
 package com;
 
-import java.text.ParseException;
+import java.net.MalformedURLException;
 import java.util.Calendar;
 import java.util.List;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import com.zhenai.crm.message.share.model.CrmMessage;
-import com.zhenai.crm.message.share.service.CrmMessageService;
 
 public class test {
 
@@ -41,20 +39,10 @@ public class test {
 	}
 	
 	public void test(){
-		System.out.println(System.currentTimeMillis());
-
-		try {
-			Thread.sleep(40*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		
-		System.out.println(System.currentTimeMillis());
 	}
 	
-	public static void main(String[] args) {
-		test t = new test();
-		t.test();
+	public static void main(String[] args) throws MalformedURLException {
 	}
 	
 }

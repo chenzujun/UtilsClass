@@ -1,4 +1,4 @@
-package com.common.utils.document;
+package com.common.util.document;
 
 import java.io.File;
 import java.util.Stack;

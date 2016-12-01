@@ -1,4 +1,4 @@
-package com.common.utils;
+package com.common.util;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -10,7 +10,9 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +35,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
 
-public class HycCommonUtils {
+public class CommonUtils {
 
 	/**
 	 * 方法说明：把日期变成 2009-01-02这样的格式 创建日期：2009-2-23,下午02:24:03
@@ -481,7 +483,7 @@ public class HycCommonUtils {
 	{
 		List<Integer> workDay = new ArrayList<Integer>();
 		boolean isNoHoliday = holiday == null || holiday.size()==0; 
-		int days = HycCommonUtils.getMonthDays(month);
+		int days = CommonUtils.getMonthDays(month);
 		for( int i=1;i<=days;++i ){
 			if (isNoHoliday || ! holiday.contains(i)) {
 				workDay.add(i);
@@ -761,14 +763,14 @@ public class HycCommonUtils {
 			return;
 		}
 		Map<String, Object> first = list.get(0);
-		Number pren = HycCommonUtils.evalNumber(first.get(sortField));
+		Number pren = CommonUtils.evalNumber(first.get(sortField));
 		if (pren == null)
 			pren = 0;
 		int hRand = 1;
 		first.put("hRand", hRand);
 		for (int i = 1; i < list.size(); i++) {
 			Map<String, Object> item = list.get(i);
-			Number n = HycCommonUtils.evalNumber(item.get(sortField));
+			Number n = CommonUtils.evalNumber(item.get(sortField));
 			if (n == null) {
 				item.put(sortField, 0);
 				n = 0;
@@ -798,7 +800,7 @@ public class HycCommonUtils {
 		for (int i = 0; i < list.size(); i++) {
 			Map<String, Object> item = list.get(i);
 			for (String key : keys) {
-				String value = HycCommonUtils.evalString(item.get(key));
+				String value = CommonUtils.evalString(item.get(key));
 				if (value != null && value.length() > 0) {
 					item.put(key,
 							value.replaceFirst("^[0-9\\.\\-\\+\\s\\:]+", ""));
@@ -1040,7 +1042,7 @@ public class HycCommonUtils {
 		} else if ("week".equalsIgnoreCase(unit)) {
 			amount = amount * 7;
 		}
-		return HycCommonUtils.add(paymentDate, field, amount);
+		return CommonUtils.add(paymentDate, field, amount);
 	}
 
 	public static Integer zeroToNull(Integer num) {
@@ -1067,7 +1069,7 @@ public class HycCommonUtils {
 	 * @param request
 	 * @return
 	 */
-	public static String getRealRemoteIp(HttpServletRequest request) {
+	/*public static String getRealRemoteIp(HttpServletRequest request) {
 		String ip = request.getHeader("Cdn-Src-Ip");
 		request.setAttribute("Cdn_Src_Ip", ip == null ? "null" : ip);
 		if (StringUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
@@ -1079,6 +1081,48 @@ public class HycCommonUtils {
 			request.setAttribute("RemoteAddr", ip == null ? "null" : ip);
 		}
 		return ip;
+	}*/
+	public static String getRealRemoteIp(HttpServletRequest request) {
+		String ipAddress = request.getHeader("Cdn-Src-Ip");
+		request.setAttribute("Cdn_Src_Ip", ipAddress == null ? "null" : ipAddress);
+		if(StringUtils.isBlank(ipAddress) ||  "unknown".equalsIgnoreCase(ipAddress)){
+			ipAddress = request.getHeader("x-forwarded-for");
+			request.setAttribute("x_forwarded_for", ipAddress == null ? "null" : ipAddress);
+		}
+		if (ipAddress == null || ipAddress.length() == 0
+				|| "unknown".equalsIgnoreCase(ipAddress)) {
+			ipAddress = request.getHeader("Proxy-Client-IP");
+		}
+		if (ipAddress == null || ipAddress.length() == 0
+				|| "unknown".equalsIgnoreCase(ipAddress)) {
+			ipAddress = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ipAddress == null || ipAddress.length() == 0
+				|| "unknown".equalsIgnoreCase(ipAddress)) {
+			ipAddress = request.getRemoteAddr();
+			if (ipAddress.equals("127.0.0.1")
+					|| ipAddress.equals("0:0:0:0:0:0:0:1")) {
+				// 根据网卡取本机配置的IP
+				InetAddress inet = null;
+				try {
+					inet = InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
+				ipAddress = inet.getHostAddress();
+			}
+		}
+		if (StringUtils.isBlank(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
+			ipAddress = request.getRemoteAddr();
+			request.setAttribute("RemoteAddr", ipAddress == null ? "null" : ipAddress);
+		}
+		// 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+		if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
+			if (ipAddress.indexOf(",") > 0) {
+				ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
+			}
+		}
+		return ipAddress;
 	}
 	
 	public static boolean isIe(HttpServletRequest request) {
@@ -1316,8 +1360,8 @@ public class HycCommonUtils {
 	
 	public static boolean isMonday(Date date){
 		Calendar c = Calendar.getInstance();
-		String dateStr = HycCommonUtils.formateDateToStr(date);
-		Date tmpDate = HycCommonUtils.parseDateFormStr(dateStr,"yyyy-MM-dd");
+		String dateStr = CommonUtils.formateDateToStr(date);
+		Date tmpDate = CommonUtils.parseDateFormStr(dateStr,"yyyy-MM-dd");
 		long curDate = tmpDate.getTime();
 		for (int i = 1; i <= 6; i++) {
 			c.setTime(tmpDate);
@@ -1359,8 +1403,8 @@ public class HycCommonUtils {
 		int curYear = tmp.get(Calendar.YEAR);
 		int curMonth = tmp.get(Calendar.MONTH)+1;
 		Calendar c = Calendar.getInstance();
-		String dateStr = HycCommonUtils.formateDateToStr(date);
-		long curDate = HycCommonUtils.parseDateFormStr(dateStr,"yyyy-MM-dd").getTime();
+		String dateStr = CommonUtils.formateDateToStr(date);
+		long curDate = CommonUtils.parseDateFormStr(dateStr,"yyyy-MM-dd").getTime();
 		long firstWeekDate1 = 0;
 		long firstWeekDate2 = 0;
 		for(int i=1; i<=6; i++){//一个月最多5个星期
@@ -1373,24 +1417,24 @@ public class HycCommonUtils {
 			if(year==curYear && month==curMonth){
 				++ week;
 				long begin = c.getTime().getTime();
-				long end = HycCommonUtils.add(c.getTime(), Calendar.DATE, 6).getTime();
+				long end = CommonUtils.add(c.getTime(), Calendar.DATE, 6).getTime();
 				if(curDate>=begin && curDate<=end){
 					break;
 				}
 			}
 			if(i == 1) {
 				firstWeekDate1 = c.getTime().getTime();
-				firstWeekDate2 = HycCommonUtils.add(c.getTime(), Calendar.DATE, 6).getTime();
+				firstWeekDate2 = CommonUtils.add(c.getTime(), Calendar.DATE, 6).getTime();
 			}
 		}
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("month", HycCommonUtils.firstDayOfMonthToStr(date));
+		result.put("month", CommonUtils.firstDayOfMonthToStr(date));
 		result.put("week", week);
-		int weeks = HycCommonUtils.getWeeksOfMonth(date);
+		int weeks = CommonUtils.getWeeksOfMonth(date);
 		if(curDate>=firstWeekDate1 && curDate<=firstWeekDate2  && weeks == week){
 			Date month = DateUtils.addMonths(date, -1);
-			int weeksTmp = HycCommonUtils.getWeeksOfMonth(month);
-			result.put("month", HycCommonUtils.firstDayOfMonthToStr(month));
+			int weeksTmp = CommonUtils.getWeeksOfMonth(month);
+			result.put("month", CommonUtils.firstDayOfMonthToStr(month));
 			result.put("week", weeksTmp);
 		}
 		return result;
@@ -1512,8 +1556,8 @@ public class HycCommonUtils {
 			throw new RuntimeException("时间不能为null");
 		}
 		try {
-			date1 = HycCommonUtils.parseDateFormStr(HycCommonUtils.formateDateToStr(date1, "yyyy-MM-dd"));
-			date2 = HycCommonUtils.parseDateFormStr(HycCommonUtils.formateDateToStr(date2, "yyyy-MM-dd"));
+			date1 = CommonUtils.parseDateFormStr(CommonUtils.formateDateToStr(date1, "yyyy-MM-dd"));
+			date2 = CommonUtils.parseDateFormStr(CommonUtils.formateDateToStr(date2, "yyyy-MM-dd"));
 		} catch (ParseException e) {
 		}
 		return date1.compareTo(date2);
@@ -1604,6 +1648,6 @@ public class HycCommonUtils {
 	}
 	
 	public static void main(String[] args) throws Exception {
-         System.out.println(HycCommonUtils.formateDateToStr(getFirstWeekEndDate(new Date(), 1)));
+         System.out.println(CommonUtils.formateDateToStr(getFirstWeekEndDate(new Date(), 1)));
 	}
 }

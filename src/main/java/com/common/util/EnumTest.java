@@ -1,4 +1,4 @@
-package com.common.utils;
+package com.common.util;
 
 public enum EnumTest {
     MON(1), TUE(2), WED(3), THU(4), FRI(5), SAT(6) {

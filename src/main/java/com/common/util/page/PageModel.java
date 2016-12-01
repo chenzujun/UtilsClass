@@ -1,4 +1,4 @@
-package com.common.utils.page;
+package com.common.util.page;
 
 import java.util.ArrayList;
 import java.util.List;

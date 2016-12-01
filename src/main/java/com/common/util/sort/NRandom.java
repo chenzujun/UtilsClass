@@ -1,4 +1,4 @@
-package com.common.utils.sort;
+package com.common.util.sort;
 
 import java.util.ArrayList;
 import java.util.List;

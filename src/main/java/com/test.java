@@ -1,13 +1,12 @@
 package com;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import com.common.utils.HycCommonUtils;
+import com.caucho.hessian.client.HessianProxyFactory;
+import com.zhenai.crm.message.share.model.CrmMessage;
+import com.zhenai.crm.message.share.service.CrmMessageService;
 
 public class test {
 
@@ -41,15 +40,21 @@ public class test {
 		return calendar.get(Calendar.DAY_OF_MONTH) == now;
 	}
 	
-	public static void main(String[] args) throws ParseException {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-		Date date = df.parse("2016-09-03");
-		
-	    if(date.before(new Date())){
-	    	System.out.println("开始售卖");
-	    }else {
-	    	System.out.println("=====");
-	    }
-	}
+	public void test(){
+		System.out.println(System.currentTimeMillis());
 
+		try {
+			Thread.sleep(40*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(System.currentTimeMillis());
+	}
+	
+	public static void main(String[] args) {
+		test t = new test();
+		t.test();
+	}
+	
 }

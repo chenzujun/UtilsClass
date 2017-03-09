@@ -7,7 +7,6 @@ public class Test {
 		Integer i = 129;
 		 int h = 127;
 		Integer ii =Integer.valueOf(127);
-		Integer ii2 =new Integer(100000);
 		if(i==ii){
 			System.out.println("true");
 		}else {

@@ -43,6 +43,8 @@ public class test {
 	}
 	
 	public static void main(String[] args) throws MalformedURLException {
+		
+		System.out.println(Double.parseDouble("1321.00"));
 	}
 	
 }

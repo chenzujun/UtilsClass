@@ -1,0 +1,30 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>when clicking links below, show the number of its sequence</h3>
+    <ul>
+        <li><a href="#">link #0</a></li>
+        <li><a href="#">link #1</a></li>
+        <li><a href="#">link #2</a></li>
+        <li><a href="#">link #3</a></li>
+        <li><a href="#">link #4</a></li>
+    </ul>
+</body>
+<script type="text/javascript">
+var links = document.getElementsByTagName("ul")[0].getElementsByTagName("a");
+
+
+for(var i=0;i<links.length;i++){
+	// 赋值声明
+	links[i].onclick = (function(index){
+		return function(){
+			alert(index);
+		};
+	})(i);
+}
+
+</script>
+
+</html>

@@ -1,4 +1,4 @@
-package com.sort;
+package com.algorithm.sort;
 
 /**
  * 算法先将要排序的一组数按某个增量d（n/2,n为要排序数的个数）分成若干组，

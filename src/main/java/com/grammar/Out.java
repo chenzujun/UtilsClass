@@ -1,4 +1,4 @@
-package com;
+package com.grammar;
 
 public class Out {
     private int age = 12;

@@ -1,4 +1,4 @@
-package com.construct;
+package com.common.util;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public class MyEntityUtils {
+/**
+ * 根据数据库表生成java bean
+ * @author mustang
+ *
+ */
+public class MyEntityUtil {
     private String tablename = "";
     private String[] colnames;
     private String[] colTypes;
@@ -233,7 +238,7 @@ public class MyEntityUtils {
      * @param args
      */
     public static void main(String[] args) {
-	MyEntityUtils t = new MyEntityUtils();
+	MyEntityUtil t = new MyEntityUtil();
 	t.tableToEntity("Menu");
     }
 }

@@ -6,12 +6,12 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 
-public class Client<T> {
+public class ScriptClient<T> {
 
     public static void main(String[] args) {
         ScriptEngine s = new ScriptEngineManager().getEngineByName("javascript");
 
-        new Client<String>().test("");
+        new ScriptClient<String>().test("");
             
     }
     

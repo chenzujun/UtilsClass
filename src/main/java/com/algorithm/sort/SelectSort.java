@@ -1,4 +1,4 @@
-package com.sort;
+package com.algorithm.sort;
 
 /**
  * 基本思想：在要排序的一组数中，选出最小的一个数与第一个位置的数交换；

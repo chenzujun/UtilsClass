@@ -1,4 +1,4 @@
-package com.inherit;
+package com.grammar.inherit;
 
 public class Children extends Parent {
 

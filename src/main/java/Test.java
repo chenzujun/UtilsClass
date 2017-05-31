@@ -1,21 +1,31 @@
-
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Test {
-	static final int low = -128;
-	
-	public static void main(String[] args) {
-		Integer i = 129;
-		 int h = 127;
-		Integer ii =Integer.valueOf(127);
-		if(i==ii){
-			System.out.println("true");
-		}else {
-			System.out.println("false");
-		}
-		  
-		h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
-		System.out.println("max:"+Integer.MAX_VALUE);
-		System.out.println("high:"+h);
-		 assert i >= 127;
-	}
+
+     int num1 = num2 +2;
+    static int num2 = 20;
+    
+    private static Pattern VARIABLE_PATTERN = Pattern.compile(
+            "\\$\\s*\\{?\\s*([\\._0-9a-zA-Z]+)\\s*\\}?");
+
+    public static void main(String[] args) throws Exception {
+        List<String> list = new ArrayList();  
+        list.add("1");  
+        list.add("2");  
+        list.add("3");  
+        list.add("4");  
+        list.add("5");  
+        Iterator<String> it = list.iterator();
+        while (it.hasNext()) {
+            String temp = it.next();
+            if ("2".equals(temp)) {
+                it.remove();
+            }
+        }
+        
+        System.out.println(list.size());  
+    }
 }

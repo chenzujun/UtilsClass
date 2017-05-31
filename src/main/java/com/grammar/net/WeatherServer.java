@@ -1,4 +1,4 @@
-package com.grammar.socket;
+package com.grammar.net;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

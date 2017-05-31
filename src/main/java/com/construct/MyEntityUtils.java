@@ -19,8 +19,8 @@ public class MyEntityUtils {
     private boolean importSql = false;
     private boolean importMath = false;
     
-    public static final String url = "jdbc:mysql://10.10.10.7:3306/test?"
-            + "user=crm_query&password=query96333&useUnicode=true&characterEncoding=UTF8";  
+    public static final String url = "jdbc:mysql://192.168.1.86/yunhus_crminterface?"
+            + "user=crm&password=crm123123&useUnicode=true&characterEncoding=UTF8";  
     public static final String name = "com.mysql.jdbc.Driver";  
 
     /**
@@ -48,7 +48,8 @@ public class MyEntityUtils {
 	    colScale = new int[size];
 	    for (int i = 0; i < rsmd.getColumnCount(); i++) {
 		rsmd.getCatalogName(i + 1);
-		colnames[i] = rsmd.getColumnName(i + 1).toLowerCase();
+//		colnames[i] = rsmd.getColumnName(i + 1).toLowerCase();
+		colnames[i] = rsmd.getColumnName(i + 1);
 		colTypes[i] = rsmd.getColumnTypeName(i + 1).toLowerCase();
 		colScale[i] = rsmd.getScale(i + 1);
 		System.out.println(rsmd.getCatalogName(i + 1));
@@ -121,7 +122,6 @@ public class MyEntityUtils {
     private void processColnames(StringBuffer sb) {
 	sb.append("\r\n/** " + tablename + "\r\n");
 	String colsiz = "";
-	String colsca = "";
 	for (int i = 0; i < colnames.length; i++) {
 	    colsiz = colSizes[i] <= 0 ? "" : (colScale[i] <= 0 ? "("
 		    + colSizes[i] + ")" : "(" + colSizes[i] + "," + colScale[i]
@@ -207,11 +207,11 @@ public class MyEntityUtils {
      * @return
      */
     private String oracleSqlType2JavaType(String sqlType, int scale, int size) {
-	if (sqlType.equals("integer")) {
+	if (sqlType.equals("int") || sqlType.equals("tinyint")) {
 	    return "Integer";
 	} else if (sqlType.equals("long")) {
-	    return "Long";
-	} else if (sqlType.equals("float") || sqlType.equals("float precision")
+            return "Long";
+        }else if (sqlType.equals("float") || sqlType.equals("float precision")
 		|| sqlType.equals("double")
 		|| sqlType.equals("double precision")) {
 	    return "BigDecimal";
@@ -234,6 +234,6 @@ public class MyEntityUtils {
      */
     public static void main(String[] args) {
 	MyEntityUtils t = new MyEntityUtils();
-	t.tableToEntity("op_basic");
+	t.tableToEntity("Menu");
     }
 }

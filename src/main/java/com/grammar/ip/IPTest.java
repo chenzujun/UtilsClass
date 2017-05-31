@@ -9,74 +9,66 @@ import org.apache.log4j.Logger;
 
 import com.log.Log4jTest;
 
-public class IPTest
-{
+public class IPTest {
+
     private static Logger log = Logger.getLogger(Log4jTest.class);
-    
-    private String getIpAddr(HttpServletRequest request)
-    {
+
+    private String getIpAddr(HttpServletRequest request) {
         String ipAddress = null;
         ipAddress = request.getHeader("x-forwarded-for");
         String zhangipAddress = ipAddress;
         log.warn("==ipAddressipAddressipAddressipAddress===weixi==" + ipAddress);
-        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress))
-        {
+        if (ipAddress == null || ipAddress.length() == 0
+                || "unknown".equalsIgnoreCase(ipAddress)) {
             ipAddress = request.getHeader("Proxy-Client-IP");
         }
         // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-        if (zhangipAddress != null && zhangipAddress.indexOf(",") > -1)
-        { // "***.***.***.***".length()
-            zhangipAddress = zhangipAddress.substring(zhangipAddress.lastIndexOf(",") + 1).trim();
+        if (zhangipAddress != null && zhangipAddress.indexOf(",") > -1) { // "***.***.***.***".length()
+            zhangipAddress = zhangipAddress.substring(
+                    zhangipAddress.lastIndexOf(",") + 1).trim();
         }
-        log.warn("==ipAddressipAddressipAddressipAddress===zhang==" + zhangipAddress);
-        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress))
-        {
+        log.warn("==ipAddressipAddressipAddressipAddress===zhang=="
+                + zhangipAddress);
+        if (ipAddress == null || ipAddress.length() == 0
+                || "unknown".equalsIgnoreCase(ipAddress)) {
             ipAddress = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress))
-        {
+        if (ipAddress == null || ipAddress.length() == 0
+                || "unknown".equalsIgnoreCase(ipAddress)) {
             ipAddress = request.getRemoteAddr();
-            if (ipAddress.equals("127.0.0.1"))
-            {
+            if (ipAddress.equals("127.0.0.1")) {
                 // 根据网卡取本机配置的IP
                 InetAddress inet = null;
-                try
-                {
+                try {
                     inet = InetAddress.getLocalHost();
-                }
-                catch (UnknownHostException e)
-                {
+                } catch (UnknownHostException e) {
                     e.printStackTrace();
                 }
                 ipAddress = inet.getHostAddress();
             }
-            
+
         }
-        
+
         // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-        if (ipAddress != null && ipAddress.length() > 15)
-        { // "***.***.***.***".length()
-          // = 15
-            if (ipAddress.indexOf(",") > 0)
-            {
+        if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
+                                                            // = 15
+            if (ipAddress.indexOf(",") > 0) {
                 ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
             }
         }
         return zhangipAddress;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         InetAddress inet = null;
-        try
-        {
+        try {
             inet = InetAddress.getLocalHost();
-        }
-        catch (UnknownHostException e)
-        {
+        } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         String ipAddress = inet.getHostAddress();
         System.out.println(ipAddress);
+        
+        new IPTest().getIpAddr(null);
     }
 }

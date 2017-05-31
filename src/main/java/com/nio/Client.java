@@ -13,7 +13,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import com.util.CharsetHelper;
+import com.common.util.CharsetHelper;
 
 public class Client implements Runnable {
 	private BlockingQueue<String> words;
@@ -43,7 +43,7 @@ public class Client implements Runnable {
 
 			while (!isOver) {
 				selector.select();
-				Iterator ite = selector.selectedKeys().iterator();
+				Iterator<SelectionKey> ite = selector.selectedKeys().iterator();
 				while (ite.hasNext()) {
 					SelectionKey key = (SelectionKey) ite.next();
 					ite.remove();

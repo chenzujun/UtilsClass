@@ -11,7 +11,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-import com.util.CharsetHelper;
+import com.common.util.CharsetHelper;
 
 public class XiaoNa {
 	private ByteBuffer readBuffer;
@@ -44,7 +44,7 @@ public class XiaoNa {
 		while (true) {
 			try {
 				selector.select();
-				Iterator ite = selector.selectedKeys().iterator();
+				Iterator<SelectionKey> ite = selector.selectedKeys().iterator();
 
 				while (ite.hasNext()) {
 					SelectionKey key = (SelectionKey) ite.next();

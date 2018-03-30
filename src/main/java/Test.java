@@ -1,31 +1,32 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Test {
+	public static int test() {
+		int a = 10;
+		int b = 0;
 
-     int num1 = num2 +2;
-    static int num2 = 20;
-    
-    private static Pattern VARIABLE_PATTERN = Pattern.compile(
-            "\\$\\s*\\{?\\s*([\\._0-9a-zA-Z]+)\\s*\\}?");
+		try {
+			System.out.println(a / b);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-    public static void main(String[] args) throws Exception {
-        List<String> list = new ArrayList();  
-        list.add("1");  
-        list.add("2");  
-        list.add("3");  
-        list.add("4");  
-        list.add("5");  
-        Iterator<String> it = list.iterator();
-        while (it.hasNext()) {
-            String temp = it.next();
-            if ("2".equals(temp)) {
-                it.remove();
-            }
-        }
-        
-        System.out.println(list.size());  
-    }
+		return 20;
+	}
+	
+	public static boolean isOdd(int i) {
+		if(i%2 != 0){   //是奇数   
+	        return true;   
+	    }   
+	    return false; 
+	}
+
+	public static void main(String[] args) throws Exception {
+		System.out.println(isOdd(-1));
+		System.out.println(isOdd(-2));
+		System.out.println(isOdd(0));
+		System.out.println(isOdd(3));
+		System.out.println(Math.ceil(7/(6*1.0)));
+	}
 }

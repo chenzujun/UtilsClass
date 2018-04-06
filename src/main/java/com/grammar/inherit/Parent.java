@@ -9,4 +9,11 @@ public class Parent {
 	public void test(){
 		System.out.println("父类普通方法");
 	}
+
+	@Override
+	public String toString() {
+		return "Parent [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
 }

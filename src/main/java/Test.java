@@ -1,32 +1,31 @@
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+
+import com.bean.User;
 
 public class Test {
-	public static int test() {
-		int a = 10;
-		int b = 0;
-
-		try {
-			System.out.println(a / b);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return 20;
+	public int test(Double a) {
+		System.out.println(a);
+		return 0;
 	}
-	
-	public static boolean isOdd(int i) {
-		if(i%2 != 0){   //是奇数   
-	        return true;   
-	    }   
-	    return false; 
+	public void test(int c, String b) {
+		System.out.println(c+b);
 	}
-
+	public void test( String b,int c) {
+		System.out.println(c+b);
+	}
+	public static void swap(User x, User y) {
+		User tmp = x;
+		x=y;
+		y=tmp;
+	}
 	public static void main(String[] args) throws Exception {
-		System.out.println(isOdd(-1));
-		System.out.println(isOdd(-2));
-		System.out.println(isOdd(0));
-		System.out.println(isOdd(3));
-		System.out.println(Math.ceil(7/(6*1.0)));
+		User[] u = new User[2];
+		u[0] = new User("chen");
+		u[1] = new User("jun");
+		System.out.println(u.length);
+		
+		ArrayList<Integer> a = new ArrayList<>();
+		
 	}
 }

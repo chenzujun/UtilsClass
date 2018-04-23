@@ -12,6 +12,9 @@ public class SetTest {
         set.add(new Integer(1));
         set.add(new Integer(22));
         set.add(new Integer(333));
+        set.add(null);
+
+        System.out.println(set.size());
 
         Iterator<Integer> iter = set.iterator();
         while (iter.hasNext()) {

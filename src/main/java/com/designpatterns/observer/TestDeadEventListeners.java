@@ -1,8 +1,7 @@
 package com.designpatterns.observer;
 
-import org.junit.Test;
-
 import com.google.common.eventbus.EventBus;
+import org.junit.Test;
 
 public class TestDeadEventListeners {
 	@Test

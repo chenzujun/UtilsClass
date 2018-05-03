@@ -1,13 +1,9 @@
 package com.common.util.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
-public class JDBCMysqlTest {
+public class JDBCMysqlTest2 {
     private static final String USER_MYSQL = "raine";
     private static final String PASS_MYSQL = "123456";
 
@@ -36,7 +32,7 @@ public class JDBCMysqlTest {
         String passwordParam = "'or '1'='1";
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try {
             String sql = "SELECT * FROM user where name='" + nameParam +
                     "' and password='" + passwordParam + "'";
@@ -44,11 +40,13 @@ public class JDBCMysqlTest {
             Class.forName("com.mysql.jdbc.Driver");
             // STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL_MYSQL, USER_MYSQL, PASS_MYSQL);
-            // STEP 3: Get a Statement
-            stmt = conn.createStatement();
+            // STEP 3: Get a PreparedStatement
+            stmt = conn.prepareStatement(sql);
+//            stmt.setString(1,nameParam);
+//            stmt.setString(2,passwordParam);
             System.out.println(sql);
             // STEP 4: Execute a query
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name

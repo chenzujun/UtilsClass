@@ -6,6 +6,25 @@ import java.util.List;
 
 public class ArrayListTest {
 
+    public static void testSubList() {
+        List<String> list=new  ArrayList<>();
+        list.add("d");
+        list.add("33");
+        list.add("44");
+        list.add("55");
+        list.add("66");
+
+        List<String> list2 = list.subList(2, list.size());
+        list2.add("77");
+
+        //6
+        System.out.println(list.size());
+        //3
+        System.out.println(list2.size());
+
+        List<Object> tempList = new ArrayList<Object>(list.subList(2, list.size()));
+    }
+
     public static void testListRemove() {
         List<Integer> list = new ArrayList<Integer>();
         list.add(0);
@@ -50,6 +69,7 @@ public class ArrayListTest {
 
 
     public static void main(String[] args) {
-        testListRemove();
+//        testListRemove();
+        testSubList();
     }
 }

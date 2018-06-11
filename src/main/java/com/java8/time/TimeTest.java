@@ -1,6 +1,7 @@
 package com.java8.time;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @description: java8 time API测试
@@ -23,6 +24,13 @@ public class TimeTest {
         System.out.println("millis="+millis);
     }
 
+    public static void  testLocalDateTime(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("localDateTime="+localDateTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(localDateTime.format(formatter));
+    }
+
     public static void main(String[] args) {
         testInstant();
 
@@ -32,8 +40,7 @@ public class TimeTest {
         LocalTime localTime = LocalTime.now();
         System.out.println("localTime="+localTime);
 
-        LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println("localDateTime="+localDateTime);
+        testLocalDateTime();
 
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
         System.out.println("zonedDateTime="+zonedDateTime);

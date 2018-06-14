@@ -14,7 +14,17 @@ import java.util.stream.Stream;
  * @create: 2018-05-26
  **/
 public class StreamDemo {
-    public static void main(String[] args) {
+
+    private static List<Student> studentList;
+    static {
+        Student student1 = new Student("zhangsan", 60);
+        Student student2 = new Student("wangwu", 80);
+        Student student3 = new Student("lisi", 70);
+        Student student4 = new Student("zhaoliu", 90);
+        studentList = Arrays.asList(student1, student2, student3, student4);
+    }
+
+    public static void testProcess(){
         Student student1 = new Student("zhangsan", 60);
         Student student2 = new Student("wangwu", 80);
         Student student3 = new Student("lisi", 70);
@@ -28,7 +38,7 @@ public class StreamDemo {
         // 2 中间操作
         Stream<Student> stream = students.stream()
                 .filter((e) -> {System.out.println("惰性求值");return e.getScore() < 80;})
-                .map(x->{x.setName(x.getName().toUpperCase());return x;})
+                .map(e->{e.setName(e.getName().toUpperCase());return e;})
                 .limit(1);
         System.out.println("执行最终操作--------------------");
         // 3 终止操作
@@ -38,6 +48,21 @@ public class StreamDemo {
         System.out.println();
         System.out.println("经过处理后的集合");
         students.forEach(e -> System.out.println("name="+e.getName()+"|score="+e.getScore()+"|hashcode="+e.hashCode()));
+    }
 
+    /**
+     * 一个 Stream 只可以使用一次
+     */
+    public static void testOneUse(){
+        // 1、创建Stream，List<Student> studentList
+        Stream<Student> streamStu = studentList.stream();
+        Object[] s1 = streamStu.toArray();
+        List<Student> list = streamStu.collect(Collectors.toList());
+        list.forEach(e -> System.out.println("name="+e.getName()+"|score="+e.getScore()+"|hashcode="+e.hashCode()));
+    }
+
+    public static void main(String[] args) {
+//        testOneUse();
+        testProcess();
     }
 }

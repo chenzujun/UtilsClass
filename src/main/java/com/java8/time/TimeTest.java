@@ -31,11 +31,15 @@ public class TimeTest {
         System.out.println(localDateTime.format(formatter));
     }
 
+    public static void  testLocalDate(){
+        LocalDate localDate = LocalDate.now();
+        System.out.println("localDate="+localDate);
+    }
+
     public static void main(String[] args) {
         testInstant();
 
-        LocalDate localDate = LocalDate.now();
-        System.out.println("localDate="+localDate);
+
 
         LocalTime localTime = LocalTime.now();
         System.out.println("localTime="+localTime);

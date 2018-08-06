@@ -6,11 +6,14 @@ package com.common.util.http;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.ApiResponse;
 import com.bean.PreFestRequest;
+import com.common.util.ExcelUtils;
 import com.common.util.HttpUtils;
 import com.common.util.JsonUtil;
 import com.common.util.document.FileProperties;
 import com.grammar.thread.CommonThreadExecutor;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +37,7 @@ public class HttpRequestSet {
     public static final String CHANNEL_SERVICE_URL ="channel.service.url";
     public static final String CHANNEL_SERVICE_METHOD = "channel.service.method.submitFest";
     public static final String CHANNEL_SERVICE_APPKEY = "channel.service.appkey";
+    private static final String EXCEL_FILE_PATH = "F:/channel.xlsx";
 
     public static String getChannelServiceUrl(){
         String urlPrefix = FileProperties.getMyProperty(CHANNEL_CONFIG_FILE_PATH, CHANNEL_SERVICE_URL);
@@ -44,10 +48,11 @@ public class HttpRequestSet {
         return url;
     }
 
-    public Map<String, Object> buildParams() {
+    public Map<String, Object> buildParams(Row row) {
         Map<String, Object> params = new HashMap<>(5);
+        // TODO
         params.put("channelCode", "711");
-        params.put("orderNo", "900301910630");
+        params.put("orderNo", ExcelUtils.getStringValue(row, 1));
         params.put("organizationCode", "CNTPEA");
 
         List<PreFestRequest> list = new ArrayList<>();
@@ -63,12 +68,22 @@ public class HttpRequestSet {
         String url = getChannelServiceUrl();
 
         // 读取参数文件
+        Sheet sheet = ExcelUtils.getSheet(EXCEL_FILE_PATH);
+        int sheetRows = sheet.getLastRowNum();
 
-        // 封装参数发起请求
-        Map<String, Object> params = buildParams();
+        // 获取指定单元格的对象引用
+        for (int i = 1; i <= sheetRows; i++) {
+            Row row = sheet.getRow(i);
+            if (row == null) {
+                continue;
+            }
+            // 封装参数发起请求
+            Map<String, Object> params = buildParams(row);
 
-        AsyncPost asyncPost = new AsyncPost(params, url, "900301910630");
-        CommonThreadExecutor.execute(asyncPost);
+            AsyncPost asyncPost = new AsyncPost(params, url, ExcelUtils.getStringValue(row, 1));
+            CommonThreadExecutor.execute(asyncPost);
+        }
+
     }
 
     class AsyncPost implements Runnable {

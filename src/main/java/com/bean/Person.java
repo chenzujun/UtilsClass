@@ -26,7 +26,7 @@ public class Person implements Serializable {
     public LocalDate birthday;
     private Sex gender;
     private String emailAddress;
-    private String salary;
+    private transient String salary;
 
     public Person(String name, LocalDate birthday, Sex gender, String emailAddress) {
         this.name = name;

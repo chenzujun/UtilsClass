@@ -21,8 +21,8 @@ public class TestObjSerializeAndDeserialize {
 
         //反序列Perons对象
         Person p = DeserializePerson();
-        System.out.println(MessageFormat.format("name={0},age={1},sex={2}",
-                p.getName(), p.getBirthday().toString(), p.getGender().name()));
+        System.out.println(MessageFormat.format("name={0},age={1},sex={2},salary={3}",
+                p.getName(), p.getBirthday().toString(), p.getGender().name(), p.getSalary()));
     }
 
     /**
@@ -37,6 +37,7 @@ public class TestObjSerializeAndDeserialize {
         person.setName("chen");
         person.setBirthday(LocalDate.of(2017, 12, 25));
         person.setGender(Person.Sex.FEMALE);
+        person.setSalary("1000890.07");
 
         // ObjectOutputStream 对象输出流，将Person对象存储到E盘的Person.txt文件中，完成对Person对象的序列化操作
         ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(

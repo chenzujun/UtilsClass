@@ -3,7 +3,7 @@ package com.grammar.inherit;
 
 public class Animal extends Parent {
 
-	public String name;
+	public String name = "animal";
 	public Integer age;
 	private String privateVal;
 	String defaultVal;
@@ -17,6 +17,14 @@ public class Animal extends Parent {
 		this.privateVal = privateVal;
 		this.defaultVal = defaultVal;
 		this.protectedVal = protectedVal;
+	}
+
+	public void call(){
+		System.out.println("animal call！！！");
+	}
+
+	public static void eat(){
+		System.out.println("static animal eat！！！");
 	}
 
 	public String getName() {

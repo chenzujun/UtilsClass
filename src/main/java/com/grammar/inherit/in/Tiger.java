@@ -8,6 +8,7 @@ import com.grammar.inherit.Animal;
  * @since V1.0.0
  */
 public class Tiger extends Animal {
+    public String name = "tiger";
 
     private String tigerPrivateVal;
 
@@ -25,6 +26,15 @@ public class Tiger extends Animal {
     public Tiger(String name, Integer age, String privateVal, String defaultVal, String protectedVal, String tigerPrivateVal) {
         super(name, age, privateVal, defaultVal, protectedVal);
         this.tigerPrivateVal=tigerPrivateVal;
+    }
+
+    @Override
+    public void call(){
+        System.out.println("tiger call！！！");
+    }
+
+    public static void eat(){
+        System.out.println("static tiger eat！！！");
     }
 
     @Override

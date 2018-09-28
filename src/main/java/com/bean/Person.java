@@ -16,6 +16,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person implements Serializable {
+    private static final long serialVersionUID = 5548105142011789878L;
+
     public enum Sex{
         MALE,FEMALE
     }
@@ -24,8 +26,16 @@ public class Person implements Serializable {
     public LocalDate birthday;
     private Sex gender;
     private String emailAddress;
+    private String salary;
 
-    public static int compareByAge(Person a,Person b){
+    public Person(String name, LocalDate birthday, Sex gender, String emailAddress) {
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.emailAddress = emailAddress;
+    }
+
+    public static int compareByAge(Person a, Person b){
         return a.birthday.compareTo(b.birthday);
     }
 }

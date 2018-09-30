@@ -14,8 +14,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -63,7 +61,7 @@ public class JavaSmsApi {
 
         /**************** 使用智能匹配模版接口发短信(推荐) *****************/
         // 设置您要发送的内容(内容必须和某个模板匹配。以下例子匹配的是系统提供的1号模板）
-        String text = "陈锦波,123";
+        String text = "4444,123";
         // 发短信调用示例
         // System.out.println(JavaSmsApi.sendSms(apikey, text, mobile));
 

@@ -21,7 +21,7 @@ public class ThreadPoolTest {
             try {
                 Thread.sleep(1000);
 
-                System.out.println(name + " finished job!");
+                System.out.println(name + " finished job!"+ Thread.currentThread());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

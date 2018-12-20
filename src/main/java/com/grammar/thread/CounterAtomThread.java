@@ -20,13 +20,16 @@ public class CounterAtomThread {
      */
     static CountDownLatch countDownLatch = new CountDownLatch(30);
     public static void main(String []args) throws InterruptedException {
+//        int a= num.incrementAndGet();
+//        System.out.println("return value="+a+" | real value="+num);
+
         //开启30个线程进行累加操作
         for(int i=0;i<30;i++){
             new Thread(){
                 public void run(){
-                    for(int j=0;j<10000;j++){
+                    for(int j=0;j<1000;j++){
                         //原子性的num++,通过循环CAS方式
-                        num.incrementAndGet();
+                       num.incrementAndGet();
                     }
                     countDownLatch.countDown();
                 }

@@ -7,20 +7,27 @@ package com.grammar.thread;
  **/
 public class VolatileTest {
     static int i = 0, j = 0;
-    static void one() { i++; j++; }
+    static void one() {
+        i++;
+//        try {
+//            Thread.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        j++;
+    }
     static void two() {
-        if(i != j){
-            System.out.println("i="+i + " j=" + j);
-        }
+        System.out.println("i="+i + " j=" + j + " time="+System.currentTimeMillis());
     }
     public static void main(String[] args) {
-        while (true) {
-            new Thread(){
-                public void run(){
-                    VolatileTest.one();
-                }
-            }.start();
+        System.out.println("i="+i + " j=" + j + " time="+System.currentTimeMillis());
+        new Thread(){
+            public void run(){
+                VolatileTest.one();
+            }
+        }.start();
 
+        while (true) {
             new Thread(){
                 public void run(){
                     VolatileTest.two();

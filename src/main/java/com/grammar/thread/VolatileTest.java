@@ -1,7 +1,7 @@
 package com.grammar.thread;
 
 /**
- * @description: volatile Fields
+ * @description: volatile Fields 为什么偶尔是j>i
  * @author: mustang
  * @create: 2018-12-23
  **/

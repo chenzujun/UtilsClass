@@ -15,24 +15,4 @@ public class TomatoPizza implements Pizza {
     public Pizza orderPizza() {
         return null;
     }
-
-    @Override
-    public void prepare() {
-
-    }
-
-    @Override
-    public void bake() {
-
-    }
-
-    @Override
-    public void cut() {
-
-    }
-
-    @Override
-    public void box() {
-
-    }
 }

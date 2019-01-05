@@ -16,23 +16,4 @@ public class CheesePizza implements Pizza {
         return new CheesePizza();
     }
 
-    @Override
-    public void prepare() {
-
-    }
-
-    @Override
-    public void bake() {
-
-    }
-
-    @Override
-    public void cut() {
-
-    }
-
-    @Override
-    public void box() {
-
-    }
 }

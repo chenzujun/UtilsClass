@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-import com.log.Log4jTest;
+import com.common.log.Log4jTest;
 
 public class IPTest {
 

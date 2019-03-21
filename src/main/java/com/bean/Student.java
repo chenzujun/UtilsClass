@@ -1,6 +1,5 @@
 package com.bean;
 
-import com.java8.Car;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,12 @@ import java.util.function.Supplier;
 public class Student {
     private String name;
     private int score;
+    public String nickName;
+
+    public Student(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
 
     public static Student create(final Supplier<Student> supplier) {
         return supplier.get();

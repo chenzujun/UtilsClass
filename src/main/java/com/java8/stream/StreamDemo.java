@@ -1,7 +1,6 @@
 package com.java8.stream;
 
 import com.bean.Student;
-import com.dynamicproxy.Employee;
 
 import java.util.Arrays;
 import java.util.List;

@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class ConcurrentDateUtil {
     private static final String date_format = "yyyy-MM-dd HH:mm:ss";
-    private static ThreadLocal<DateFormat> threadLocal = new ThreadLocal<DateFormat>();
+    private static ThreadLocal<DateFormat> threadLocal = new ThreadLocal<>();
 
     public static DateFormat getDateFormat(){
         DateFormat df = threadLocal.get();
@@ -25,7 +25,7 @@ public class ConcurrentDateUtil {
         return df;
     }
 
-    public static String formatDate(Date date) throws ParseException {
+    public static String formatDate(Date date) {
         return getDateFormat().format(date);
     }
 

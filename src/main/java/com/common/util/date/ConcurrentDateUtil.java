@@ -13,13 +13,14 @@ import java.util.Date;
  * @since V1.0.0
  */
 public class ConcurrentDateUtil {
-    private static final String date_format = "yyyy-MM-dd HH:mm:ss";
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static ThreadLocal<DateFormat> threadLocal = new ThreadLocal<>();
 
     public static DateFormat getDateFormat(){
         DateFormat df = threadLocal.get();
         if(df==null){
-            df = new SimpleDateFormat(date_format);
+            df = new SimpleDateFormat(DATE_FORMAT);
             threadLocal.set(df);
         }
         return df;

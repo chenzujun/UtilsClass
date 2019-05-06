@@ -26,9 +26,26 @@ public class RegexTest {
         return sb.toString();
     }
 
+    /**
+     * 匹配元素
+     * @return
+     */
+    public static String getMatcher() {
+        String source = "<currentCPResCode>DISTRIBUTOR_13438311</currentCPResCode>";
+        String result = "";
+        Pattern pattern = Pattern.compile("<currentCPResCode>(.*)</currentCPResCode>");
+        Matcher matcher = pattern.matcher(source);
+        while (matcher.find()) {
+            result = matcher.group(1);
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        String str = "*adCVs*34_a _09_b5*[/435^?……{}【】。，；’“‘”？";
-        System.out.println(str);
-        System.out.println(StringFilter(str));
+//        String str = "*adCVs*34_a _09_b5*[/435^?……{}【】。，；’“‘”？";
+//        System.out.println(str);
+//        System.out.println(StringFilter(str));
+
+        System.out.println(getMatcher());
     }
 }

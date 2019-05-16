@@ -1,42 +1,35 @@
 package com.grammar.random;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomTest {
-	private static int a = 0;//65<
-	private static int b = 0;//35
-	private static int c = 0;//5
-	
-	public static void getRandomInt(){
-		Random random = new Random();
-		System.out.println(random.nextInt(1));
-	}
-	
-	public static void test(){
-		for (int i = 0; i < 30; i++) {
-			int r = getRandom(100);
-			if(r<65){
-				a++;
-			}else if(r<95){
-				b++;
-			}else {
-				c++;
-			}
-		}
-	}
-	
-	private static int getRandom(int limit){
-		if(limit<=0 || limit >100){
-			limit = 100;
-		}
-		Random random = new Random();
-		return random.nextInt(limit)+1;
-	}
-	
-	public static void main(String[] args) {
-		test();
-		System.out.println("a="+a);
-		System.out.println("b="+b);
-		System.out.println("c="+c);
-	}
+
+    /**
+     * 多线程效率低，原因：多个线程同时计算新的种子时候会竞争同一个原子变量的更新操作
+     */
+    public static void getRandomIntByRandom() {
+        // 不要设置seed，除非必要
+        Random random = new Random();
+        int rand = random.nextInt();
+        System.out.println("getRandomIntByRandom 1= " + rand);
+    }
+
+    /**
+     * 各线程维护本地种子。提升效率
+     */
+    public static void getRandomIntByThreadLocalRandom() {
+        int rand = ThreadLocalRandom.current().nextInt();
+        System.out.println("getRandomIntByThreadLocalRandom = " + rand);
+    }
+
+    public static void main(String[] args) {
+        int i = 0;
+        while (i < 2) {
+            getRandomIntByRandom();
+            getRandomIntByThreadLocalRandom();
+
+            i++;
+        }
+    }
 }

@@ -1,6 +1,9 @@
 package com;
 
-import com.bean.Student;
+import com.bean.Animal;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author chenjun
@@ -9,16 +12,14 @@ import com.bean.Student;
  */
 public class test {
     public static void main(String[] args) {
-        Student student = new Student();
-        student.setName("test");
-        student.setNickName("nick");
+        Map<Animal,Object> map = new HashMap<Animal, Object>(6){
+            {
+                put(new Animal("老虎"), new Object());
+            }
+        };
 
-        System.out.println("getNickName:"+student.getNickName());
-        System.out.println("nickName:"+student.nickName);
+        boolean b1 = map.containsKey(new Animal("老虎"));
 
-        student.nickName="::";
-        System.out.println("getNickName:"+student.getNickName());
-        System.out.println("nickName:"+student.nickName);
-
+        System.out.println(b1);
     }
 }

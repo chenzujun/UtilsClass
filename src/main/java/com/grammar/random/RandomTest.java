@@ -1,35 +1,34 @@
 package com.grammar.random;
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class RandomTest {
-
-    /**
-     * 多线程效率低，原因：多个线程同时计算新的种子时候会竞争同一个原子变量的更新操作
-     */
-    public static void getRandomIntByRandom() {
-        // 不要设置seed，除非必要
-        Random random = new Random();
-        int rand = random.nextInt();
-        System.out.println("getRandomIntByRandom 1= " + rand);
-    }
-
-    /**
-     * 各线程维护本地种子。提升效率
-     */
-    public static void getRandomIntByThreadLocalRandom() {
-        int rand = ThreadLocalRandom.current().nextInt();
-        System.out.println("getRandomIntByThreadLocalRandom = " + rand);
+    private static final long multiplier = 0x5DEECE66DL;
+    private static final long addend = 0xBL;
+    private static final long mask = (1L << 48) - 1;
+    private static final AtomicLong seedUniquifier
+            = new AtomicLong(8682522807148012L);
+    public int nextInt() {
+        long oldseed, nextseed;
+        do {
+            oldseed = seedUniquifier.get();
+            nextseed = (oldseed * multiplier + addend) & mask;
+        } while (!seedUniquifier.compareAndSet(oldseed, nextseed));
+        return (int)nextseed;
     }
 
     public static void main(String[] args) {
+        RandomTest r = new RandomTest();
         int i = 0;
-        while (i < 2) {
-            getRandomIntByRandom();
-            getRandomIntByThreadLocalRandom();
-
+        long start = System.nanoTime();
+        long start2 = System.currentTimeMillis();
+        while (i < 100000) {
+            System.out.println(r.nextInt());
             i++;
         }
+        long end = System.nanoTime();
+        long end2 = System.currentTimeMillis();
+        System.out.println("耗时 = "+(end-start));
+        System.out.println("耗时2 = "+(end2-start2));
     }
 }

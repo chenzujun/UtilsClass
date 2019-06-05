@@ -7,19 +7,24 @@ package com.designpatterns.template;
  */
 public abstract class AbstractClass {
 
-    void templateMethod(){
+    public final void templateMethod(){
         operation1();
-        operation2();
+        if(hook()){
+            operation2();
+        }
         concreteOperation();
-        hook();
     }
 
-    abstract void operation1();
-    abstract void operation2();
+    protected abstract void operation1();
+
+    protected abstract void operation2();
 
     void concreteOperation(){
         System.out.println("模板实现 concreteOperation");
     }
 
-    void hook(){}
+    boolean hook(){
+        return true;
+    }
+
 }

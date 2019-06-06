@@ -19,7 +19,8 @@ public class ConcreteClass extends AbstractClass {
         System.out.println("operation2");
     }
 
-    boolean hook(){
+    @Override
+    protected boolean hook(){
         return false;
     }
 }

@@ -9,7 +9,7 @@ public abstract class AbstractClass {
 
     public final void templateMethod(){
         operation1();
-        if(hook()){
+        if(this.hook()){
             operation2();
         }
         concreteOperation();
@@ -23,7 +23,7 @@ public abstract class AbstractClass {
         System.out.println("模板实现 concreteOperation");
     }
 
-    boolean hook(){
+    protected  boolean hook(){
         return true;
     }
 

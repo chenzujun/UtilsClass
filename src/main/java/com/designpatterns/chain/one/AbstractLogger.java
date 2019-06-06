@@ -21,11 +21,16 @@ public abstract class AbstractLogger {
         this.nextLogger = nextLogger;
     }
 
+    /**
+     * 处理与调用解耦
+     *
+     * @param level
+     * @param message
+     */
     public void logMessage(int level, String message){
         if(this.level <= level){
             write(message);
-        }
-        if(nextLogger !=null){
+        }else if(nextLogger !=null){
             nextLogger.logMessage(level, message);
         }
     }

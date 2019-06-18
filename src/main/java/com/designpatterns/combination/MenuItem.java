@@ -2,6 +2,8 @@ package com.designpatterns.combination;
 
 import lombok.Data;
 
+import java.util.Iterator;
+
 /**
  * 菜单项
  *
@@ -21,6 +23,11 @@ public class MenuItem extends MenuComponent {
         this.description = description;
         this.vegetarian = vegetarian;
         this.price = price;
+    }
+
+    @Override
+    public Iterator creatIterator(){
+        return new NullIterator();
     }
 
     @Override

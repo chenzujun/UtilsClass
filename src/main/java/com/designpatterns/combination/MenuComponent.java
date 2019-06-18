@@ -1,5 +1,7 @@
 package com.designpatterns.combination;
 
+import java.util.Iterator;
+
 /**
  * 菜单组件
  *
@@ -16,4 +18,10 @@ public abstract class MenuComponent {
     public void print(){
         throw new UnsupportedOperationException();
     }
+
+    public boolean isVegetarian(){
+        throw new UnsupportedOperationException();
+    }
+
+    public abstract Iterator creatIterator();
 }

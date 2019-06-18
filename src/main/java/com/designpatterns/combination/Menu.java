@@ -21,6 +21,11 @@ public class Menu extends MenuComponent {
     }
 
     @Override
+    public Iterator creatIterator(){
+        return new CompositeIterator(menuComponents.iterator());
+    }
+
+    @Override
     public void print() {
         System.out.print("    "+getName());
         System.out.println("    --"+getDescription());

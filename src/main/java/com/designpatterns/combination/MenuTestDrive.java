@@ -27,6 +27,7 @@ public class MenuTestDrive {
         dinerMenu.add(westernFoodMenu);
 
         Waitress waitress = new Waitress(allMenus);
-        waitress.printMenu();
+//        waitress.printMenu();
+        waitress.printVegetarianMenu();
     }
 }

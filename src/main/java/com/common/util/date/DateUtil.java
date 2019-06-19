@@ -19,6 +19,11 @@ public class DateUtil {
     public static DateFormat FORMAT_START = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
     public static DateFormat FORMAT_END = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
 
+    /**
+     * 带时区的日期格式
+     */
+    public static final String Format_DateTime_UTC = "yyyy-MM-dd HH:mm:ss Z";
+    public static final String Format_DateTime = "yyyy-MM-dd HH:mm:ss";
 
     public static Date getDateFromString(String dateStr) {
         Date date = null;
@@ -586,6 +591,28 @@ public class DateUtil {
         begin.set(Calendar.HOUR_OF_DAY, 0);
         begin.set(Calendar.MINUTE, 0);
         return begin.getTime();
+    }
+
+    public static String formatTime(Date date, String format) {
+        String s = "";
+        if (date != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            s = sdf.format(date);
+        }
+
+        return s;
+    }
+
+    public static Date parseDate(String s, String format) {
+        Date date = null;
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(s)) {
+            try {
+                date = (new SimpleDateFormat(format)).parse(s);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return date;
     }
 
     public static void main(String[] args) {

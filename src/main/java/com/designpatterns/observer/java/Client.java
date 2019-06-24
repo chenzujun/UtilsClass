@@ -8,10 +8,7 @@ package com.designpatterns.observer.java;
 public class Client {
     public static void main(String[] args) {
         WeatherData weatherData = new WeatherData();
-        CurrentConditionsDisplay display = new CurrentConditionsDisplay(weatherData);
+        new CurrentConditionsDisplay(weatherData);
         weatherData.setMeasurements(82, 12);
-
-        
-
     }
 }

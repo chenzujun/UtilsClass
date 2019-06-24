@@ -1,4 +1,4 @@
-package com.designpatterns.observer;
+package com.designpatterns.observer.common;
 
 /**
  * 布告板接口

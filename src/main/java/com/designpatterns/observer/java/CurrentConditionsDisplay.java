@@ -1,6 +1,6 @@
 package com.designpatterns.observer.java;
 
-import com.designpatterns.observer.DisplayElement;
+import com.designpatterns.observer.common.DisplayElement;
 
 import java.util.Observable;
 import java.util.Observer;

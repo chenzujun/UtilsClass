@@ -1,8 +1,6 @@
 package com.designpatterns.observer.original;
 
 
-import com.designpatterns.observer.java.CurrentConditionsDisplay;
-
 /**
  * @description: 观察者模式测试类
  * @author: mustang

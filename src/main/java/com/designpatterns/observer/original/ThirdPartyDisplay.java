@@ -1,6 +1,6 @@
 package com.designpatterns.observer.original;
 
-import com.designpatterns.observer.DisplayElement;
+import com.designpatterns.observer.common.DisplayElement;
 
 /**
  * @description: 显示器（观察者）

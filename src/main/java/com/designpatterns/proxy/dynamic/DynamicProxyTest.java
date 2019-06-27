@@ -9,10 +9,15 @@ import java.lang.reflect.Proxy;
  */
 public class DynamicProxyTest {
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
+
         BuyHouse buyHouse = new BuyHouseImpl();
         BuyHouse proxyBuyHouse = (BuyHouse) Proxy.newProxyInstance(BuyHouse.class.getClassLoader(), new
                 Class[]{BuyHouse.class}, new DynamicProxyHandler(buyHouse));
         proxyBuyHouse.buyHosue();
         proxyBuyHouse.move();
+
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);
     }
 }

@@ -128,5 +128,10 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.2</version>
 		</dependency>
+		<dependency>
+			<groupId>ws-commons-util</groupId>
+			<artifactId>ws-commons-util</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

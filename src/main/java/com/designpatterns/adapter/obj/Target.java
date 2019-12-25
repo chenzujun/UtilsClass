@@ -7,6 +7,6 @@ package com.designpatterns.adapter.obj;
  * @date 2019/6/21
  * @since V1.0.0
  */
-public interface Target {
+public interface Target extends ObjectTest{
     public void request();
 }

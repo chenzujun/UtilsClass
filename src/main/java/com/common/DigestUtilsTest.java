@@ -35,7 +35,7 @@ public class DigestUtilsTest {
     }
 
     public static void main(String[] args) {
-        String bizdata = "{\"verificationCode\":\"121701\",\"appOperationTime\":1573783087854,\"userId\":\"68c837d65b294252a66707b5fccd227c\",\"userName\":\"S9614\",\"pudoName\":\"4PX-火炭坳背灣 HK003點\",\"pudoCode\":\"HKG-P005\",\"siteType\":\"TAKE_PUDO\"}";
+        String bizdata = "{\"locationCode\":\"kw01.01.02\",\"warehouseNumber\":\"900192225405\",\"referenceNumber\":\"\",\"appOperationTime\":1573783087854,\"userId\":\"68c837d65b294252a66707b5fccd227c\",\"userName\":\"S9614\",\"whName\":\"\",\"whCode\":\"HKG-P005\",\"siteType\":\"TRANS_WH\",\"isUniqueLocation\":false}";
         System.out.println(getSign(bizdata));
     }
 }

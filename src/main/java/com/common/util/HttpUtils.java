@@ -262,4 +262,42 @@ public class HttpUtils {
         }
     }
 
+    public static String postTextplain(String url, String params) {
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.addHeader("Content-Type", "text/plain");
+        if (params != null) {
+            httpPost.setEntity(new StringEntity(params, Charset.forName("UTF-8")));
+        }
+        try {
+            CloseableHttpResponse response = (CloseableHttpResponse)httpClient.execute(httpPost);
+            Throwable var4 = null;
+            String var5 = null;
+            try {
+                if (response.getStatusLine().getStatusCode() != 200) {
+                    logger.error("请求失败URL:{} , StatusCode:{}", new Object[]{url, response.getStatusLine().getStatusCode()});
+                }
+
+                var5 = EntityUtils.toString(response.getEntity());
+            } catch (Throwable var15) {
+                var4 = var15;
+            } finally {
+                if (response != null) {
+                    if (var4 != null) {
+                        try {
+                            response.close();
+                        } catch (Throwable var14) {
+                            var4.addSuppressed(var14);
+                        }
+                    } else {
+                        response.close();
+                    }
+                }
+
+            }
+            return var5;
+        } catch (Exception var17) {
+            logger.error("请求异常：" + var17.getMessage(), var17);
+            return null;
+        }
+    }
 }

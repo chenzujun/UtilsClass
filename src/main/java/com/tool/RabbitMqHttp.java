@@ -10,10 +10,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Iterator;
-import java.util.concurrent.TimeoutException;
 
 /**
  * 包裹状态 pds-pdms pds_x_pkg_status pds_r_pkg_status

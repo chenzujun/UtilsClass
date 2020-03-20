@@ -1,7 +1,9 @@
 package com.tool;
 
+import com.alibaba.fastjson.JSON;
 import com.common.util.ExcelUtils;
 import com.common.util.HttpUtils;
+import com.tool.domain.*;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,6 +12,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -28,7 +31,8 @@ public class RabbitMqHttp {
 
     public static void main(String[] args) throws Exception {
 //        resend();
-        resendCallbackDispatch();
+//        resendCallbackDispatch();
+        resendPaiSongReceived();
     }
 
     enum MQ_TYPE{
@@ -115,5 +119,83 @@ public class RabbitMqHttp {
             }
         }
 
+    }
+
+    public static void resendPaiSongReceived() throws Exception{
+        final String URL = "http://mq_pds:p18y10m12s@172.16.5.42:15672/api/exchanges/pds-pdms/pds_xms_4pl_x_lastmile_callback/publish";
+        Workbook readWB = ExcelUtils.getWorkbok(new File("E://temp//mq.xlsx"));
+        if (readWB != null) {
+            Sheet readSheet = readWB.getSheetAt(0);
+            // 获取Sheet表中所包含的总行数
+            int rsRows = readSheet.getLastRowNum();
+            Row row;
+            for (int i = 0; i < 28; i++) {
+                try {
+                    row = readSheet.getRow(i);
+                    if (row == null) {
+                        continue;
+                    }
+
+                    String logisticsCode = row.getCell(0).getStringCellValue();
+                    String shippingNo = row.getCell(1).getStringCellValue();
+                    String logisticProviderId = row.getCell(2).getStringCellValue();
+                    String addressAttribute = row.getCell(3).getStringCellValue();
+                    Date opTime = row.getCell(4).getDateCellValue();
+                    Pkg pkg = new Pkg();
+                    pkg.setLogisticsCode(logisticsCode);
+                    pkg.setShippingNo(shippingNo);
+                    pkg.setLogisticProviderId(logisticProviderId);
+                    pkg.setReceiveTime(opTime);
+                    pkg.setAddressAttribute(addressAttribute);
+                    MaochaoPushEvent ins = getTianMaoPushEvent(pkg);
+
+                    String payload = JSON.toJSONString(ins);
+                    payload = StringEscapeUtils.escapeJava(payload);
+                    String body = "{\"vhost\":\"pds-pdms\",\"name\":\"amq.default\",\"properties\":{\"delivery_mode\":1,\"headers\":{}},\"routing_key\":\"pds_xms_4pl_r_lastmile_callback\",\"delivery_mode\":\"1\",\"payload\":\""+payload+"\",\"headers\":{},\"props\":{},\"payload_encoding\":\"string\"}";
+
+                    String result = HttpUtils.postTextplain(URL, body);
+                    System.out.println(result);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    private static MaochaoPushEvent getTianMaoPushEvent(Pkg pkg) {
+        MaochaoPushEvent maochaoPushEvent = new MaochaoPushEvent();
+        maochaoPushEvent.setMsg_type("CAINIAO_GLOBAL_LASTMILE_GTMSSIGN_CALLBACK");
+        maochaoPushEvent.setEventCode("GTMS_SIGNED");
+        maochaoPushEvent.setOrderNo(pkg.getLogisticsCode());
+        maochaoPushEvent.setTrackingNumber(pkg.getShippingNo());
+        maochaoPushEvent.setLogisticProviderId(pkg.getLogisticProviderId());
+
+        Lastmile lastmile = getLastmile(pkg);
+        String lastMileSource = XMLConver.java2Xml(lastmile);
+        String base64MD5String = MD5Util.encodeBase64MD5String(lastMileSource + "DFKLJDSHJ253SD2");
+        maochaoPushEvent.setDataDigest(base64MD5String);
+        maochaoPushEvent.setLogisticsInterface(lastMileSource);
+
+        return maochaoPushEvent;
+    }
+
+    private static Lastmile getLastmile(Pkg pkg) {
+        Lastmile lastmile = new Lastmile();
+        lastmile.setLogisticsOrderCode(pkg.getLogisticsCode());
+        lastmile.setTrackingNumber(pkg.getShippingNo());
+        EnumHouseTag enumHouseTag = EnumHouseTag.matchCaiNiaoCode(pkg.getAddressAttribute());
+        lastmile.setLocationType(enumHouseTag.getCainiaoCode());
+        lastmile.setOpTime(pkg.getReceiveTime());
+
+        lastmile.setDeliveriedTimes(1);
+        lastmile.setTrackingDescription("包裹已签收");
+        lastmile.setOperator("SYSTEM");
+        lastmile.setOperatorContact("SYSTEM");
+        lastmile.setOpCode("0");
+        lastmile.setOpRemark("包裹已签收");
+        lastmile.setTimeZone(8);
+
+        return lastmile;
     }
 }

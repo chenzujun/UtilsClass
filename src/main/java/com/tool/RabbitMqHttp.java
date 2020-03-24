@@ -121,6 +121,17 @@ public class RabbitMqHttp {
 
     }
 
+    /**
+     *
+     * logistics_code,shipping_no,
+     * 	case channel
+     * 		WHEN '4PX-GRID' THEN 'DISTRIBUTOR_13415511'
+     * 		WHEN 'GRID-HK-LG' THEN 'DISTRIBUTOR_13413400'
+     * 	else channel end '资源code',
+     * address_attribute,receive_time
+     *
+     * @throws Exception
+     */
     public static void resendPaiSongReceived() throws Exception{
         final String URL = "http://mq_pds:p18y10m12s@172.16.5.42:15672/api/exchanges/pds-pdms/pds_xms_4pl_x_lastmile_callback/publish";
         Workbook readWB = ExcelUtils.getWorkbok(new File("E://temp//mq.xlsx"));

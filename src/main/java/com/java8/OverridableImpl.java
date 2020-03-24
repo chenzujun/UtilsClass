@@ -1,7 +1,5 @@
 package com.java8;
 
-import java.util.function.Supplier;
-
 /**
  * @description:
  * @author: mustang

@@ -7,32 +7,37 @@ package com.grammar.thread;
  **/
 public class VolatileTest {
     static int i = 0, j = 0;
+    static volatile int i2 = 0, j2 = 0;
+
     static void one() {
         i++;
-//        try {
-//            Thread.sleep(10);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         j++;
     }
-    static void two() {
-        System.out.println("i="+i + " j=" + j + " time="+System.currentTimeMillis());
+    static void two() { i2++; j2++; }
+    static void three() {
+        if(i != j){
+            System.out.println("i="+i + " j=" + j + " time="+System.currentTimeMillis());
+        }
+        if(i2 != j2){
+            System.out.println("i2="+i2 + " j2=" + j2 + " time="+System.currentTimeMillis());
+        }
     }
+
     public static void main(String[] args) {
         System.out.println("i="+i + " j=" + j + " time="+System.currentTimeMillis());
-        new Thread(){
-            public void run(){
-                VolatileTest.one();
-            }
-        }.start();
+        System.out.println("i2="+i2 + " j2=" + j2 + " time="+System.currentTimeMillis());
 
-        while (true) {
-            new Thread(){
-                public void run(){
-                    VolatileTest.two();
-                }
-            }.start();
+        ThreadPoolTest.cachedThreadPool.execute(()->{
+            VolatileTest.one();
+            VolatileTest.two();
+        });
+        int g=1000;
+        while (g>0) {
+            ThreadPoolTest.cachedThreadPool.execute(()->{
+                VolatileTest.three();
+            });
+            g--;
         }
+        ThreadPoolTest.cachedThreadPool.shutdown();
     }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  * @since V1.0.0
  */
 public class CommonThreadExecutor {
-    private static ExecutorService synExe = null;
+    private static ExecutorService synExe;
 
     static {
         // 允许有线程一直驻留在线程池中，短时间会有任务使用线程

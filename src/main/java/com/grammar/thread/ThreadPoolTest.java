@@ -1,53 +1,28 @@
 package com.grammar.thread;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
+/**
+ * 线程池
+ */
 public class ThreadPoolTest {
 
-    static class MyThread implements Runnable {
+    /**
+     * 缺点：线程最大数为Integer.MAX_VALUE
+     */
+    public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
-        private String name;
+    public static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 40, 5,
+            TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadPoolExecutor.AbortPolicy());
 
-        public MyThread(String name) {
-            this.name = name;
-        }
+    /**
+     * 创建一个单线程化的线程池
+     */
+    public static  ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
-        @Override
-        public void run() {
-            // 做点事情
-            try {
-                Thread.sleep(1000);
+    /**
+     * 创建一个定长线程池，支持定时及周期性任务执行——延迟执行
+     */
+    public static ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
 
-                System.out.println(name + " finished job!"+ Thread.currentThread());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        // 创建线程池，为了更好的明白运行流程，增加了一些额外的代码
-        // BlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(2);
-        BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
-        // BlockingQueue<Runnable> queue = new
-        // PriorityBlockingQueue<Runnable>();
-        // BlockingQueue<Runnable> queue = new SynchronousQueue<Runnable>();
-
-        // AbortPolicy/CallerRunsPolicy/DiscardOldestPolicy/DiscardPolicy
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 4, 5,
-                TimeUnit.SECONDS, queue, new ThreadPoolExecutor.AbortPolicy());
-
-        // 向线程池里面扔任务
-        for (int i = 0; i < 10; i++) {
-            System.out.println("当前线程池大小[" + threadPool.getPoolSize()
-                    + "],当前队列大小[" + queue.size() + "]");
-
-            threadPool.execute(new MyThread("Thread" + i));
-        }
-        // 关闭线程池
-        threadPool.shutdown();
-    }
 }

@@ -22,9 +22,9 @@ public class MyRunnable implements Runnable {
 	public static void main(String[] args) {
 		MyRunnable r1 = new MyRunnable("runnable");
 		MyRunnable r2 = new MyRunnable("runnable");
-		Thread t1 = new Thread(r1);
-		Thread t2 = new Thread(r2);
-		t2.start();
-		t1.start();
+
+		ThreadPoolTest.singleThreadExecutor.execute(r1);
+		ThreadPoolTest.singleThreadExecutor.execute(r2);
+		ThreadPoolTest.singleThreadExecutor.shutdown();
 	}
 }

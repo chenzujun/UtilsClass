@@ -7,7 +7,14 @@ import redis.clients.jedis.Jedis;
 public class RedisTool {
 	 
     private static final String LOCK_SUCCESS = "OK";
+    /**
+     *  NX -- Only set the key if it does not already exist.
+     *  XX -- Only set the key if it already exist.
+     */
     private static final String SET_IF_NOT_EXIST = "NX";
+    /**
+     * expire time units: EX = seconds; PX = milliseconds
+     */
     private static final String SET_WITH_EXPIRE_TIME = "PX";
  
     private static final Long RELEASE_SUCCESS = 1L;

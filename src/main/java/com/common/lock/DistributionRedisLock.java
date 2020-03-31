@@ -38,6 +38,10 @@ public class DistributionRedisLock {
                 new ThreadPoolExecutor.DiscardOldestPolicy());
         for (int i=0;i<2;i++){
             service.execute(()->{
+                // Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。
+                // 10.104.6.131:7003> hgetall anyLock
+                // 1) "a9d50fdd-6af9-45be-81d9-5e21a31cf997:48"
+                // 2) "1"
                 RLock lock = redisson.getLock("anyLock");
                 try {
                     long start = System.currentTimeMillis();

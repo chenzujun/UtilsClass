@@ -5,7 +5,7 @@ package com.designpatterns.decorator;
  * @author: mustang
  * @create: 2019-01-06
  **/
-public class Mocha extends AbstractCondimentDecorator {
+public class Mocha extends AbstractBeverage {
     AbstractBeverage beverage;
 
     public Mocha(AbstractBeverage beverage) {

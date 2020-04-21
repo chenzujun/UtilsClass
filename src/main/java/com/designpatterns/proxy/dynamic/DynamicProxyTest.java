@@ -12,6 +12,10 @@ public class DynamicProxyTest {
         long start = System.currentTimeMillis();
 
         BuyHouse buyHouse = new BuyHouseImpl();
+        // Class 类的描述
+        // new Class[]{BuyHouse.class} 当个接口描述放入数组
+        // 或
+        // BuyHouseImpl.class.getInterfaces() 此类直接实现的接口对象数组
         BuyHouse proxyBuyHouse = (BuyHouse) Proxy.newProxyInstance(BuyHouse.class.getClassLoader(), new
                 Class[]{BuyHouse.class}, new DynamicProxyHandler(buyHouse));
         proxyBuyHouse.buyHosue();

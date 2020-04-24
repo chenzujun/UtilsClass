@@ -1,8 +1,12 @@
 package com.common.lock;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 
 public class RedisTool {
 	 
@@ -27,7 +31,7 @@ public class RedisTool {
      * @param expireTime 超期时间
      * @return 是否获取成功
      */
-    public static boolean tryGetDistributedLock(Jedis jedis, String lockKey, String requestId, int expireTime) {
+    public static boolean tryGetDistributedLock(JedisCluster jedis, String lockKey, String requestId, int expireTime) {
  
         String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
  
@@ -56,5 +60,17 @@ public class RedisTool {
         return false;
  
     }
- 
+
+    public static void main(String[] args) {
+        // 集群
+        HostAndPort hostAndPort = new HostAndPort("10.104.6.131", 7000);
+        Set<HostAndPort> hostAndPortSet = new HashSet<>();
+        hostAndPortSet.add(hostAndPort);
+        JedisCluster jedis = new JedisCluster(hostAndPortSet);
+        // 单点
+//        Jedis jedis2 = new Jedis("10.104.6.131",7000);
+        System.out.println(tryGetDistributedLock(jedis, "pds:test:key1","1", 60));
+        System.out.println(tryGetDistributedLock(jedis, "pds:test:key1","2", 60));
+    }
+
 }

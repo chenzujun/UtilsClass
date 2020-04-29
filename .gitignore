@@ -1,6 +1,6 @@
 # gitignore
 /target
 .classpath
-.project
 .settings/
-/bin
+/log
+/logs

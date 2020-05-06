@@ -8,8 +8,7 @@ public class SortTest {
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception {
-        BubbleSort b = (BubbleSort) Class.forName("com.sort.BubbleSort").newInstance();
-        b.sort();
+        new QuickSort().sort();
     }
 
 }

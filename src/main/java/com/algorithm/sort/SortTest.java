@@ -8,7 +8,9 @@ public class SortTest {
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception {
-        new QuickSort().sort();
+//        new QuickSort().sort();
+//        new MergingSort().sort();
+        new HeapSort().sort();
     }
 
 }

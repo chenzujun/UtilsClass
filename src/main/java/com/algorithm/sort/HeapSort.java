@@ -13,7 +13,8 @@ import java.util.Arrays;
  * 。然后对前面(n-1)个数重新调整使之成为堆。依此类推，直到只有两个节点的堆，并对它们作交换
  * ，最后得到有n个节点的有序序列。从算法描述来看，堆排序需要两个过程
  * ，一是建立堆，二是堆顶与堆的最后一个元素交换位置。所以堆排序有两个函数组成。一是建堆的渗透函数，二是反复调用渗透函数实现排序的函数。
- * 
+ * 时间复杂度：O(nlogn)
+ *
  * @ClassName: HeapSort
  * @Description: 堆排序
  * @author chenjun
@@ -21,11 +22,16 @@ import java.util.Arrays;
  * 
  */
 public class HeapSort {
-	int a[] = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 5, 4, 62, 99,
+	int[] a = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 5, 4, 62, 99,
 			98, 54, 56, 17, 18, 23, 34, 15, 35, 25, 53, 51 };
 
+	public void sort() {
+		sort(a);
+
+		System.out.print(Arrays.toString(a));
+	}
+
 	public void sort(int[] a) {
-		System.out.println("开始排序");
 		int arrayLength = a.length;
 		// 循环建堆
 		for (int i = 0; i < arrayLength - 1; i++) {
@@ -33,7 +39,6 @@ public class HeapSort {
 			buildMaxHeap(a, arrayLength - 1 - i);
 			// 交换堆顶和最后一个元素
 			swap(a, 0, arrayLength - 1 - i);
-			System.out.println(Arrays.toString(a));
 		}
 	}
 

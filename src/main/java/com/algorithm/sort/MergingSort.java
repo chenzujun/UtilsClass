@@ -5,7 +5,8 @@ import java.util.Arrays;
 /**
  * 归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。
  * 然后再把有序子序列合并为整体有序序列。
- * 
+ * 时间复杂度：O(nlogn)
+ *
  * @ClassName: MergingSort
  * @Description: 归并排序
  * @author chenjun
@@ -13,14 +14,13 @@ import java.util.Arrays;
  * 
  */
 public class MergingSort {
-	int a[] = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 5, 4, 62, 99,
+	int[] a = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 5, 4, 62, 99,
 			98, 54, 56, 17, 18, 23, 34, 15, 35, 25, 53, 51 };
 
 	public void sort() {
 		sort(a, 0, a.length - 1);
-		for (int i = 0; i < a.length; i++) {
-			System.out.println(a[i]);
-		}
+
+		System.out.print(Arrays.toString(a));
 	}
 
 	public void sort(int[] data, int left, int right) {
@@ -37,35 +37,45 @@ public class MergingSort {
 
 	}
 
+	/**
+	 * 两个排序完成的区间合并到原数据
+	 *
+	 * @param data
+	 * @param left
+	 * @param center
+	 * @param right
+	 */
 	public void merge(int[] data, int left, int center, int right) {
-		int[] tmpArr = new int[data.length];
-		int mid = center + 1;
-		// third记录中间数组的索引
-		int third = left;
-		int tmp = left;
-		while (left <= center && mid <= right) {
+		// 临时存储两个有序表合并后的有序表
+		int[] tmpArr = new int[right-left+1];
+		// 临时序列指针
+		int t = 0;
+		// 左序列指针
+		int i = left;
+		// 右序列指针
+		int j = center + 1;
+		while (i <= center && j <= right) {
 			// 从两个数组中取出最小的放入中间数组
-			if (data[left] <= data[mid]) {
-				tmpArr[third++] = data[left++];
+			if (data[i] <= data[j]) {
+				tmpArr[t++] = data[i++];
 			} else {
-				tmpArr[third++] = data[mid++];
+				tmpArr[t++] = data[j++];
 			}
-
 		}
 
 		// 剩余部分依次放入中间数组
-		while (mid <= right) {
-			tmpArr[third++] = data[mid++];
+		while (i <= center) {
+			tmpArr[t++] = data[i++];
+		}
+		while (j <= right) {
+			tmpArr[t++] = data[j++];
 		}
 
-		while (left <= center) {
-			tmpArr[third++] = data[left++];
+		// 用临时有序序列替换原数据
+		int t1 = left;
+		int t2 = 0;
+		while (t1 <= right) {
+			data[t1++] = tmpArr[t2++];
 		}
-
-		// 将中间数组中的内容复制回原数组
-		while (tmp <= right) {
-			data[tmp] = tmpArr[tmp++];
-		}
-		System.out.println(Arrays.toString(data));
 	}
 }

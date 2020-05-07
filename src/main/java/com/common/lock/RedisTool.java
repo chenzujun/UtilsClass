@@ -1,13 +1,17 @@
 package com.common.lock;
 
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
-
+/**
+ * 分布式锁
+ *
+ *
+ */
 public class RedisTool {
 	 
     private static final String LOCK_SUCCESS = "OK";
@@ -32,9 +36,9 @@ public class RedisTool {
      * @return 是否获取成功
      */
     public static boolean tryGetDistributedLock(JedisCluster jedis, String lockKey, String requestId, int expireTime) {
- 
+
         String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
- 
+
         if (LOCK_SUCCESS.equals(result)) {
             return true;
         }
@@ -49,7 +53,7 @@ public class RedisTool {
      * @param requestId 请求标识
      * @return 是否释放成功
      */
-    public static boolean releaseDistributedLock(Jedis jedis, String lockKey, String requestId) {
+    public static boolean releaseDistributedLock(JedisCluster jedis, String lockKey, String requestId) {
  
         String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
         Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));
@@ -68,7 +72,8 @@ public class RedisTool {
         hostAndPortSet.add(hostAndPort);
         JedisCluster jedis = new JedisCluster(hostAndPortSet);
         // 单点
-//        Jedis jedis2 = new Jedis("10.104.6.131",7000);
+//        JedisPool jedispool = new JedisPool("10.104.6.131",7000);
+//        Jedis jedis = jedispool.getResource();
         System.out.println(tryGetDistributedLock(jedis, "pds:test:key1","1", 60));
         System.out.println(tryGetDistributedLock(jedis, "pds:test:key1","2", 60));
     }

@@ -1,6 +1,7 @@
 package com.algorithm.sort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * 堆排序是一种树形选择排序，是对直接选择排序的有效改进。
@@ -18,9 +19,14 @@ public class HeapSort {
 			98, 54, 56, 17, 18, 23, 34, 15, 35, 25, 53, 51 };
 
 	public void sort() {
-		sort(a);
-
-		System.out.println("siz="+a.length+" | "+Arrays.toString(a));
+        int[] arr = new int[50];
+	    for (int i=0;i<50;i++){
+            int num = new Random().nextInt(50);
+            arr[i]=num;
+        }
+        System.out.println("begin siz="+arr.length+" | "+Arrays.toString(arr));
+		sort(arr);
+        System.out.println("after siz="+arr.length+" | "+Arrays.toString(arr));
 	}
 
 	public void sort(int[] a) {

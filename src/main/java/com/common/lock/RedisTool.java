@@ -9,7 +9,8 @@ import java.util.Set;
 
 /**
  * 分布式锁
- *
+ * 问题1 业务代码耗时过长，超过了锁的超时时间，造成锁自动失效
+ *  解决：使用守护线程
  *
  */
 public class RedisTool {

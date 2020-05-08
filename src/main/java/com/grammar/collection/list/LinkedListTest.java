@@ -18,21 +18,16 @@ public class LinkedListTest {
         queue.offer("c");
         queue.offer("d");
         queue.offer("e");
-        for(String q : queue){
-            System.out.println(q);
-        }
-        System.out.println("===");
-        System.out.println("poll="+queue.poll()); //返回第一个元素，并在队列中删除
-        for(String q : queue){
-            System.out.println(q);
-        }
-        System.out.println("===");
-        System.out.println("element="+queue.element()); //返回第一个元素
-        for(String q : queue){
-            System.out.println(q);
-        }
-        System.out.println("===");
-        System.out.println("peek="+queue.peek()); //返回第一个元素
+        System.out.println("开始===size="+queue.size());
+
+        //返回第一个元素，并在队列中删除
+        System.out.println("poll="+queue.poll()+" | size="+queue.size());
+
+        //返回第一个元素或异常
+        System.out.println("element="+queue.element()+" | size="+queue.size());
+
+        //返回第一个元素或null： if this queue is empty
+        System.out.println("peek="+queue.peek()+" | size="+queue.size());
         for(String q : queue){
             System.out.println(q);
         }

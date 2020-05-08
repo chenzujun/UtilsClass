@@ -8,4 +8,13 @@
 5. Redisson看门狗是原理？
     当未设置自动解锁时间（leaseTime）时，启动看门狗，当获取锁的客户端崩溃未释放锁时，看门狗来释放锁。
 6. java内存模型，为什么工作内存从主内存读数据分成read和load？一步不能解决么？
-7. 
+7. hashcode()和equals()的区别？
+    - 在Java里都是用来对比两个对象是否相等一致；
+    - equal()相等的两个对象他们的hashCode()肯定相等，也就是用equal()对比是绝对可靠的；
+    - hashCode()相等的两个对象他们的equal()不一定相等，也就是hashCode()不是绝对可靠的；
+    - hashCode存在的意义，效率高
+8. LinkedHashSet与TreeSet的区别？
+9. 
+10.
+11.
+12.

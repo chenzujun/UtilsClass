@@ -64,7 +64,6 @@ public class DistributionRedisLock  {
                             survivalThread.start();
                             Thread.sleep(20*1000);
                             survivalClamProcessor.stop();
-//                            survivalThread.interrupt();
                         } finally {
                             lock.unlock();
                         }
@@ -97,14 +96,13 @@ public class DistributionRedisLock  {
                     if(res){
                         System.out.println(Thread.currentThread().getName() + "获取锁成功 | " + (System.currentTimeMillis()-start)/1000);
                         try {
-                            Thread.currentThread().stop();
+                            // TODO 模拟线程1崩溃，未释放锁。看门狗释放锁
                         } finally {
                             lock.unlock();
                         }
                     }else {
                         System.out.println(Thread.currentThread().getName() + "获取锁失败");
                     }
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -113,6 +111,6 @@ public class DistributionRedisLock  {
     }
 
     public static void main(String[] args) throws Exception {
-        DistributionRedisLock.autoRelease();
+        DistributionRedisLock.watchDog();
     }
 }

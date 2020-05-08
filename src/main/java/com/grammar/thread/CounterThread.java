@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since V1.0.0
  */
 public class CounterThread {
-    public static volatile int num = 0;
+    public static int num = 0;
 
     /**
      *  使用原子操作类
@@ -25,26 +25,30 @@ public class CounterThread {
     static CountDownLatch countDownLatch2 = new CountDownLatch(30);
 
     public static void counter() throws Exception {
+        long start = System.currentTimeMillis();
         // 开启30个线程进行累加操作
         for(int i=0;i<30;i++){
             CommonThreadExecutor.execute(()->{
-                for(int j=0;j<10000;j++){
-                    // 1.读取 2.加一 3.赋值
-                    num++;
+                synchronized (CounterThread.class){
+                    for(int j=0;j<10000000;j++){
+                        // 1.读取 2.加一 3.赋值
+                        num++;
+                    }
                 }
                 countDownLatch.countDown();
             });
         }
         //等待计算线程执行完
         countDownLatch.await();
-        System.out.println("end:"+num);
+        System.out.println("end:"+num + " | 耗时="+(System.currentTimeMillis()-start));
     }
 
     public static void counterAtom() throws Exception {
+        long start = System.currentTimeMillis();
         // 开启30个线程进行累加操作
         for(int i=0;i<30;i++){
             CommonThreadExecutor.execute(()->{
-                for(int j=0;j<10000;j++){
+                for(int j=0;j<10000000;j++){
                     //原子性的num++,通过循环CAS方式
                     numAtom.incrementAndGet();
                 }
@@ -53,7 +57,7 @@ public class CounterThread {
         }
         //等待计算线程执行完
         countDownLatch2.await();
-        System.out.println("atom end:"+numAtom);
+        System.out.println("atom end:"+numAtom + " | 耗时="+(System.currentTimeMillis()-start));
     }
 
     public static void main(String []args) throws Exception {

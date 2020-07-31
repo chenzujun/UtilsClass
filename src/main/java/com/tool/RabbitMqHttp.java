@@ -32,7 +32,7 @@ public class RabbitMqHttp {
     public static void main(String[] args) throws Exception {
 //        resend();
 //        resendCallbackDispatch();
-        resendPaiSongReceived();
+//        resendPaiSongReceived();
     }
 
     enum MQ_TYPE{

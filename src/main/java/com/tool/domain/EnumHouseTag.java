@@ -13,7 +13,6 @@ import java.util.List;
  * @date 2017-12-12
  * @since v1.1.0
  */
-@Getter
 public enum EnumHouseTag {
     WAITING("0", "", "等确认"),
     OFFICE("-5", "Office", "商业"),
@@ -24,6 +23,18 @@ public enum EnumHouseTag {
     private String cainiaoCode;
 
     private String name;
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getCainiaoCode() {
+        return cainiaoCode;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     EnumHouseTag(String code, String cainiaoCode, String name) {
         this.code = code;

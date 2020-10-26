@@ -4,3 +4,5 @@
 .settings/
 /log
 /logs
+/.idea/
+/UtilsClass.iml

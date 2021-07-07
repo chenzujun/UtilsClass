@@ -69,4 +69,18 @@ public class MD5Util {
         return okHex.equals(encode2hex(unknown));
     }
 
+    public static String Md5Base64(String str) {
+        String encodeStr = "";
+        try {
+            byte[] utfBytes = str.getBytes("UTF-8");
+            MessageDigest mdTemp = MessageDigest.getInstance("MD5");
+            mdTemp.update(utfBytes);
+            byte[] md5Bytes = mdTemp.digest();
+            sun.misc.BASE64Encoder b64Encoder = new sun.misc.BASE64Encoder();
+            encodeStr = b64Encoder.encode(md5Bytes);
+        } catch (Exception e) {
+            return encodeStr;
+        }
+        return encodeStr;
+    }
 }

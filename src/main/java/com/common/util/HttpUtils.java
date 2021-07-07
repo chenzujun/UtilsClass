@@ -174,6 +174,15 @@ public class HttpUtils {
 
         return postExecute(url, httpPost);
     }
+    public static String postJson(String url, String params) {
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.addHeader("Content-Type", "application/json");
+        if (params != null) {
+            httpPost.setEntity(new StringEntity(params, Charset.forName("UTF-8")));
+        }
+
+        return postExecute(url, httpPost);
+    }
 
     public static String postTextplain(String url, String params) {
         HttpPost httpPost = new HttpPost(url);
